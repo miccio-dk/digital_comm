@@ -20,18 +20,22 @@
 	\frame{\titlepage}
 
 	\begin{frame}
-		\frametitle{Pulse amplitude modulation}
-		\framesubtitle{A bit more information about this}
+		\frametitle{Analog Pulse Modulation techniques}
 		\begin{itemize}
-			\item
+			\item Sample $ \rightarrow $ Pulse
+			\item Pulse properties: amplitude, width, phase/position
+			\item Modulation technique for each property: PAM, PWM, PPM
 		\end{itemize}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{This is the second slide}
-		\framesubtitle{A bit more information about this}
-		%More content goes here
+		\frametitle{Pulse Amplitude Modulation}
+		\begin{itemize}
+			\item Sequence of finite-width $ \tau $ pulses
+			\item SIgnal level $ \rightarrow $ pulse height 
+			\item Analog signal sampled at pulse edge: $ m_\delta = m(nT_s)\delta(t - nT_s) $
+			\item Holding circuit: $ h(t) = rect(\frac{t - \frac{1}{2}\tau}{\tau}) $
+		\end{itemize}
 	\end{frame}
-	% etc
 
 \end{document}

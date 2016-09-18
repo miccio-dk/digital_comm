@@ -53,7 +53,24 @@
 	\frametitle{Explaining the functions and Figures}
 	\begin{itemize}
 	\item The input that pulse modulator need is: $ d(t)= m(t)-m_s(t) $
-    	\end{itemize}
+    	\item $m(t)$ is the message signal and and $m_s(t)$ is the reference waveform.
+	\item $d(t)$ is  hard-limited and it will be multiplied by the pulse generator. So result will be: $x_c(t)$=$\Delta(nT_s)*\delta(t-nT_s)$
+	\item Also reference signal will generate by integrating $ x_c(t)$ . Result will be : $m_s(t)$= $\Delta(nT_s)*\int_{}^{t}\delta(\alpha - nT_s)d\alpha $
+	\item Demodulation of DM is accomplished by integrating $X_c(t)$ to form stairstep approximation $m_s(t)$
+	\end{itemize}
+         \end{frame}
+         
+         \begin{frame}
+         \frametitle{Figure}
+         \end{frame}
+         
+         \begin{frame}
+         \frametitle{Pulse-Code Modulation}
+         \begin{itemize}
+         \item The generation of PCM is a three-step process. First, $m_t$ gets sampled, secondly it gets quantinized and encoder.
+         \item In PCM,quantized level is transmitted data instead of sample value.
+         \item A binary "one" is represented as a pulse, and a binary "zero" represented as pulse.
+         \end {itemize}
          \end{frame}
 
 \end{document}

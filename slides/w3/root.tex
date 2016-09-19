@@ -2,6 +2,7 @@
 \usetheme{Berlin}
 \usecolortheme{beaver}
 \usepackage{graphicx}
+\usepackage[export]{adjustbox}
 
 
 \title{Modulation techniques}
@@ -62,6 +63,12 @@
          
          \begin{frame}
          \frametitle{Figure}
+         \begin{figure}
+\includegraphics[width=\textwidth,height= 6cm,keepaspectratio,center]{fig1-pcm.png}
+  \caption{Investigating TDM}
+  \label{fig:time-divison1}
+\end{figure}
+         
          \end{frame}
          
          \begin{frame}
@@ -80,12 +87,19 @@
          \item Time-Division multiplexing is best understood by considering the figure below
          \end{itemize}
          \begin{figure}
-\includegraphics[width=\textwidth,height= 10cm,keepaspectratio]{fig1.png}
+\includegraphics[width=\textwidth,height= 4cm,keepaspectratio]{fig1.png}
   \caption{Investigating TDM.}
   \label{fig:time-divison1}
 \end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Explanation of the graph}
 \begin{itemize}
-\item	 At the output,
+\item	 At the channel output, the baseband signal is demultiplexed by using a second commutator. Than if all signals are synched in terms of bandwidths, samples are transmitted sequentially.
+\item If sampled signals have unequal bandwidths, more samples must be transmitted per unit time from the wideband channels.
+\item For the minimum bandwidth, following formula will be used:$\sum_{i=1}^{N} 2*W_i*T= n_s$
+\item If it's a lowpass signal of bandwidth B, required sampled rate will be 2B. Formula will be:$\sum_{i=1}^{N} 2*W_i*T= n_s=2*B*T$
 \end{itemize}
          \end{frame}
 

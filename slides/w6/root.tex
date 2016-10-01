@@ -6,7 +6,7 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows}
 
-\title{}
+\title{Pulses Having the Zero ISI Property}
 \subtitle{}
 \author[Riccardo \and Eren]{Riccardo~Miccini\inst{1} \and Eren~Can~\inst{1}}
 \institute[DTU]
@@ -25,9 +25,8 @@
 
 
 	\frame{\titlepage}
-
 	\begin{frame}
-		\frametitle{Baseband transmission systems}
+		\frametitle{Pulse Shaping: Nyquist's Criterion For Zero ISI}
 %		\begin{tikzpicture}[auto,>=latex']
 %			\node [int] (a) {ADC};
 %			\node (begin) [left of=a,node distance=1cm, coordinate] {a};
@@ -47,73 +46,15 @@
 %			\draw[->] (f) edge node {} (g);
 %			\draw[->] (g) edge node {} (end);
 %		\end{tikzpicture}
-		\begin{figure}
-			\includegraphics[width=\textwidth,keepaspectratio,center]{block_dia.png}
-		\end{figure}
-		\begin{description}
-			\item [ADC] sampling, quantization $ \rightarrow f_s > 2W$
-			\item [Line coding] generates signal according to data format
-			\item [Pulse shaping, Receiver filter] optimizes signal for channel transmission
-			\item [Synchronization, Thresholder] samples signal at correct time, obtain bit/symbol value
-		\end{description}
 	\end{frame}
-
 	\begin{frame}
-		\frametitle{Line codes (explanation)}
+		\frametitle{Pulses Having the Zero ISI Property}
 		\begin{itemize}
-			\item NRZ - Nonreturn-to-zero
-			\begin{description}
-				\item [NRZ change] 1 = $V_DD$; 0 = $-V_DD$
-				\item [NRZ mark] 1 = level change;  0 = no change
-			\end{description}
-			\item RZ - Return-to-zero
-			\begin{description}
-				\item [Unipolar RZ] 1 = half-width pulse, 0 = no pulse
-				\item [Polar RZ] 1 = positive RZ pulse, 0 = negative RZ pulse
-				\item [Bipolar RZ] 1 = alternating RZ pulse, 0 = no pulse
-			\end{description}
-			\item Other
-			\begin{description}
-				\item [Plit phase] 1 = NRZ pulse with 0-phase, 0 = NRZ pulse with $\pi$-phase
-			\end{description}
-		\end{itemize}
-	\end{frame}
-
-	\begin{frame}
-		\frametitle{Line codes (waveforms)}
-		\begin{figure}
-			\includegraphics[width=\textwidth,height= 6.5cm,keepaspectratio,center]{line_codes.png}
-		\end{figure}
-	\end{frame}
-
-	\begin{frame}
-		\frametitle{Line codes (considerations)}
-		\begin{itemize}
-			\item Self-synchronization
-			\item Channel bandwidth, frequency response
-			\item Transparency
-			\item Error probability and detection
-		\end{itemize}
-	\end{frame}
-
-	\begin{frame}
-		\frametitle{Line codes (power spectra)}
-		\begin{figure}
-			\includegraphics[width=\textwidth,height= 6.5cm,keepaspectratio,center]{lc_spectra.png}
-		\end{figure}
-	\end{frame}
-
-	\begin{frame}
-		\frametitle{ISI - Intersymbol interference}
-		\begin{itemize}
-			\item Caused by insufficient channel BW
-			\item Shallower pulses, symbol bleeding
-			\item Solutions:
-			\begin{itemize}
-				\item Proper pulse shaping and receiver filter
-				\item Equalization
+			\item The transmission of a lowpass signal with bandwith "W" is sending a minimum of 2W independent sps.
+			\item The transmission of the nth piece of info through the channel at time $t= nT=n/(2W)$
+			\item The output of the channel due to this impulse at the input is; $y_n(t)$=$ a_n *sinc(2*W*(t-(n/2*W)))$
 			\end{itemize}
-		\end{itemize}
-	\end{frame}
-
-\end{document}
+			\begin{frame}
+			\includegraphics[width=0.5\textwidth]{Pulse Shaping Nyquist for Zero ISI.png}
+			\end{frame}
+			\end{document}

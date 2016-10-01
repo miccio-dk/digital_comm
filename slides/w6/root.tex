@@ -5,6 +5,7 @@
 \usepackage[export]{adjustbox}
 \usepackage{tikz}
 \usetikzlibrary{arrows}
+\usepackage{amsmath}
 
 \title{Pulses Having the Zero ISI Property}
 \subtitle{}
@@ -54,7 +55,24 @@
 			\item The transmission of the nth piece of info through the channel at time $t= nT=n/(2W)$
 			\item The output of the channel due to this impulse at the input is; $y_n(t)$=$ a_n *sinc(2*W*(t-(n/2*W)))$
 			\end{itemize}
-			\begin{frame}
-			\includegraphics[width=0.5\textwidth]{Pulse Shaping Nyquist for Zero ISI.png}
 			\end{frame}
+			\begin{frame}
+			\frametitle{Cosine Spectra and Corresponding Pulse Responses}
+			\begin{figure}
+			\includegraphics[width=0.8\textwidth]{Pulse Shaping Nyquist for Zero ISI.png}
+			\end{figure}
+			\end{frame}
+		\begin{frame}
+			\frametitle{Nyquist's Pulse- Shaping Criterion}
+			\begin{itemize}
+			\item Having a F.T of p(t), results in a pulse-shape function with sample values;
+			\item 
+			\[
+    X(m,n) = \left\{\begin{array}{lr}
+        x(n), & \text{for } 0\leq n\leq 1\\
+        x(n-1), & \text{for } 0\leq n\leq 1\\
+        x(n-1), & \text{for } 0\leq n\leq 1
+        \end{array}\right\} = xy
+  \]
+  			\end{itemize}		
 			\end{document}

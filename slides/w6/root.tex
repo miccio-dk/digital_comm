@@ -62,17 +62,26 @@
 			\includegraphics[width=0.8\textwidth]{Pulse Shaping Nyquist for Zero ISI.png}
 			\end{figure}
 			\end{frame}
+			
 		\begin{frame}
 			\frametitle{Nyquist's Pulse- Shaping Criterion}
 			\begin{itemize}
 			\item Having a F.T of p(t), results in a pulse-shape function with sample values;
 			\item 
 			\[
-    X(m,n) = \left\{\begin{array}{lr}
-        x(n), & \text{for } 0\leq n\leq 1\\
-        x(n-1), & \text{for } 0\leq n\leq 1\\
-        x(n-1), & \text{for } 0\leq n\leq 1
-        \end{array}\right\} = xy
+    p(nT) = \left\{\begin{array}{lr}
+        1, & \text{for } n\leq 0\\
+        0, & \text{for } 0\leq n\leq inf
+        \end{array}\right\} 
   \]
-  			\end{itemize}		
+  			\begin{frame}
+			\frametitle{Transmitter and Receiver Filters for Zero ISI}
+			\begin{itemize} Considering simplified transmitter model under consideration here, k-th sample value multiplies a unit impulse occuring at time kT and this weighted impulse train is the input to a transmitter filter with impulse response $h_t(t)$ and corresponding frequency response $H_T(f)$
+			\item We can mathematically explain by following calculations, 
+			$x_(t)$=$\sum_{k=-infty}^{\infty} a_k*\delta(t-kT)*h_T(t) $
+			\end{itemize}
+			
+			 
+  			\end{itemize}
+			\end{frame}		
 			\end{document}

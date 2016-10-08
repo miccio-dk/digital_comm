@@ -6,6 +6,7 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows}
 \usepackage{amsmath}
+\usepackage{lmodern}% http://ctan.org/pkg/lm
 
 \title{Pulses Having the Zero ISI Property}
 \subtitle{}
@@ -47,11 +48,15 @@
 %			\draw[->] (f) edge node {} (g);
 %			\draw[->] (g) edge node {} (end);
 %		\end{tikzpicture}
+	\begin{itemize}
+	\item It will focus on the investigating the designs for the transmitter and receiver filters that shape the overall signal pulse-shape function
+	\item It will eliminate interference between adjacent pulses.
+	\end{itemize}
 	\end{frame}
 	\begin{frame}
 		\frametitle{Pulses Having the Zero ISI Property}
 		\begin{itemize}
-			\item The transmission of a lowpass signal with bandwith "W" is sending a minimum of 2W independent sps.
+			\item The transmission of a lowpass signal with bandwidth "W" is sending a minimum of 2W independent sps.
 			\item The transmission of the nth piece of info through the channel at time $t= nT=n/(2W)$
 			\item The output of the channel due to this impulse at the input is; $y_n(t)$=$ a_n *sinc(2*W*(t-(n/2*W)))$
 			\end{itemize}
@@ -74,11 +79,18 @@
         0, & \text{for } 0\leq n\leq inf
         \end{array}\right\} 
   \]
+  			\end{itemize}
+			\end{frame}
+			
   			\begin{frame}
 			\frametitle{Transmitter and Receiver Filters for Zero ISI}
-			\begin{itemize} Considering simplified transmitter model under consideration here, k-th sample value multiplies a unit impulse occuring at time kT and this weighted impulse train is the input to a transmitter filter with impulse response $h_t(t)$ and corresponding frequency response $H_T(f)$
-			\item We can mathematically explain by following calculations, 
-			$x_(t)$=$\sum_{k=-infty}^{\infty} a_k*\delta(t-kT)*h_T(t) $
+			\begin{itemize} 
+			\item Considering simplified transmitter model under consideration here, k-th sample value multiplies a unit impulse occuring at time kT and this weighted impulse train is the input to a transmitter filter with impulse response $h_t(t)$ and corresponding frequency response $H_T(f)$
+			\item We can mathematically explain by following calculations,  $x_(t)$=$\sum_{k=-\infty}^{\infty} a_k*\delta(t-kT)*h_T(t) $
+			\item So output of the channel will be: $y(t)= x(t)*h_c(t)$
+			\item And the output of the receiver filter is : $v(t)=y(t)*h_r(t)$
+			\item  We want output to have the zero-ISI property and, to be specific set: $V(t)$=$\sum_{k=-\infty}^{\infty} a_k*a_k*A_pRC(t-kT-t_d) $
+
 			\end{itemize}
 			\end{frame}		
 			\end{document}

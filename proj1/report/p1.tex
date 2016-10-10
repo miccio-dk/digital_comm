@@ -1,2 +1,58 @@
 \section{Problem 1.1}
-...
+
+\subsection{\code{rand} and \code{randn}}
+The MATLAB functions \code{rand} and \code{randn} are used to generate sequences of random numbers.
+\begin{description}
+	\item[rand] Uniformly distributed random numbers in the interval $ (0, 1) $
+	\item[randn] Normally distributed random numbers with $ \mu = 0 $ and $ \sigma = 1 $
+\end{description}
+
+The functions support the same combinations of input arguments.
+They can be used to return a single scalar when called with no parentheses, or a matrix of $ n_1 \times n_2 \times \dots \times n_N $ elements.
+
+
+\subsection{\code{hist}}
+The MATLAB function \code{hist} is used to generate the histogram of a sequence of numbers, i.e. the blabla.
+It support the following arguments:
+\begin{description}
+	\item[]
+	\item[]
+\end{description}
+
+
+\subsection{Examples}
+Here there will be shown example usages of the two functions, and proofs of their properties.
+The following code snippets generate a vector of 1000 numbers using \code{rand} and \code{randn} respectively, calculates their mean value and plot the histogram of the sequence.
+
+\begin{lstlisting}[language=Octave]
+a = rand(1000, 1);
+mean(a)
+hist(a)
+\end{lstlisting}
+\fig{5cm}{histrand.png}{Histogram of rand function}
+
+As it can be seen from the figure above, the distribution of the numbers is approximately uniform, with all the values within the interval $ (0, 1) $.
+The mean of the sequence is very close to 0.5.
+
+\begin{lstlisting}[language=Octave]
+a = randn(1000, 1);
+mean(a)
+std(a)
+hist(a)
+\end{lstlisting}
+\fig{5cm}{histrandn.png}{Histogram of randn function}
+
+As it can be seen from the figure above, the distribution of the numbers follows a gaussian curve.
+The mean of the sequence is very close to 0, and its standard deviation to 1.
+
+
+\subsection{\code{randn} and normal probability density function}
+In the following section, it will be shown how the values returned by \code{randn} follow the probability density function blabla.
+
+\begin{lstlisting}[language=Octave]
+a = randn(1000, 1);
+mean(a)
+std(a)
+hist(a)
+\end{lstlisting}
+\fig{5cm}{histrandn.png}{Histogram of randn function}

@@ -1,6 +1,7 @@
 clear;
 hold off;
 clf;
+pkg load signal
 
 title({'';''})
 figure(1)
@@ -8,7 +9,7 @@ figure(1)
 fs = 44100;
 f = 1000;
 ph = [0 pi/2 pi];
-pwr = [.001 .01 .1 1];
+pwr = [0 .001 .01 .1 1];
 
 % create a time vector
 n = 0:100-1;
@@ -20,11 +21,6 @@ for i = 1:3
   sig_norm(:,i) = sig(:,i) / std(sig(:,i)) * sqrt(1e-3);
 end
 
-% plot signals with legend
-subplot(5,1,1)
-plot(n, sig_norm)
-legend({'{\sin(\hat{\omega}n)}', '{\sin(\hat{\omega}n + frac{\pi}{2})}', '{\sin(\hat{\omega}n + \pi)}'})
-
 for i = 1:length(pwr)
   % generate noise signal
   noise = randn(1, length(n))';
@@ -33,13 +29,15 @@ for i = 1:length(pwr)
   
   % sum sines and noise
   sig_noise = sig_norm + noise_norm;
-  % calculate SNR
-  snr(i,:) = var(sig_noise)/var(noise_norm);
   
-  % plot noisy signals
-  subplot(5,1,i+1)
-  plot(n, sig_noise)  
+  % generate autocorrelation of noisy signals
+  for j = 1:3
+    [acor_tmp, lag_tmp] = xcorr(sig_noise(:,j));
+    acor(:,j) = acor_tmp;
+    lag(:,j) = lag_tmp;
+  end
+  
+  % plot autocorrelation
+  subplot(5,1,i)
+  plot(lag, acor)
 end
-
-% print SNRs
-snr

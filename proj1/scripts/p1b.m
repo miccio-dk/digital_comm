@@ -2,9 +2,10 @@ clear;
 hold off;
 clf;
 
-title({'';''})
+title({'Gaussian noise and sinusoidal signals'})
 figure(1)
 
+% simulation parameters
 fs = 44100;
 f = 1000;
 ph = [0 pi/2 pi];
@@ -21,9 +22,9 @@ for i = 1:3
 end
 
 % plot signals with legend
-subplot(5,1,1)
+subplot(length(pwr)+1,1,1)
 plot(n, sig_norm)
-legend({'{\sin(\hat{\omega}n)}', '{\sin(\hat{\omega}n + frac{\pi}{2})}', '{\sin(\hat{\omega}n + \pi)}'})
+legend({'{sin(\omega*T_s*n)}', '{sin(\omega*T_s*n + \pi/2)}', '{sin(\omega*T_s*n + \pi)}'})
 
 for i = 1:length(pwr)
   % generate noise signal
@@ -34,10 +35,10 @@ for i = 1:length(pwr)
   % sum sines and noise
   sig_noise = sig_norm + noise_norm;
   % calculate SNR
-  snr(i,:) = var(sig_noise)/var(noise_norm);
+  snr(i,:) = var(sig_norm)/var(noise_norm);
   
   % plot noisy signals
-  subplot(5,1,i+1)
+  subplot(length(pwr)+1,1,i+1)
   plot(n, sig_noise)  
 end
 

@@ -1,2 +1,82 @@
 \section{Problem 1.2}
-...
+
+\subsection{\code{xcorr}}
+The MATLAB function \code{xcorr} is used to compute the cross-correlation of discrete-time signals.
+Given two discrete-time signals $f_1$ and $f_2$, their cross-correlation is defined as:
+
+\begin{equation}
+	r_{f_1, f_2}[k] = \sum_{n=-\infty}^{\infty}f_1[n] * f_2[n+k]
+\end{equation}
+
+Where $k$ represents the amount of delay between the two signals.
+Such operation is particularly useful to verify whether two signals are related, or to identify specific features of a signal within another.
+
+When such function is applied on the same signal, it takes the name of auto-correlation.
+For $k=0$, the auto-correlation value of a signal corresponds to its power.
+
+In MATLAB, the following arguments can be specified:
+\begin{description}
+	\item[x] if only one input vector is passed, its auto-correlation will be computed
+	\item[y] if a second input vector is passed, the cross-correlation between the two will be computed; the vectors must have the same length - if that is not the case, the shortest will be padded with zeros
+	\item[maxlag] optionally, a maximum value of $k$ can be specified
+\end{description}
+
+The function returns a vector containing the result of the operation over various values of $k$.
+
+
+\subsection{Autocorrelation of the noisy sinusoidal signals}
+In this section, the \code{xcorr} function will be used to reconstruct the sinusoidal components of the signals from the previous problem.
+
+The following code generates sinusoidal signals with various SNR levels, calculates their auto-correlation, and plots them.
+
+\begin{lstlisting}[language=Octave]
+clear;
+hold off;
+clf;
+pkg load signal
+
+title({'Autocorrelation of noisy sinusoidal signals'})
+figure(1)
+
+% simulation parameters
+fs = 44100;
+f = 1000;
+ph = [0 pi/2 pi];
+pwr = [0 .001 .01 .1 1];
+
+% create a time vector
+n = 0:100-1;
+
+% generate and normalize 3 sine signals
+sig = zeros(length(n), 3);
+for i = 1:3
+  sig(:,i) = sin(2*pi*f*n/fs + ph(i));
+  sig_norm(:,i) = sig(:,i) / std(sig(:,i)) * sqrt(1e-3);
+end
+
+for i = 1:length(pwr)
+  % generate noise signal
+  noise = randn(1, length(n))';
+  % normalize signal
+  noise_norm = noise / std(noise) * sqrt(pwr(i));
+
+  % sum sines and noise
+  sig_noise = sig_norm + noise_norm;
+
+  % generate autocorrelation of noisy signals
+  for j = 1:3
+    [acor_tmp, lag_tmp] = xcorr(sig_noise(:,j));
+    acor(:,j) = acor_tmp;
+    lag(:,j) = lag_tmp;
+  end
+
+  % plot autocorrelation
+  subplot(5,1,i)
+  plot(lag, acor)
+end
+\end{lstlisting}
+\fig{9cm}{p2.png}{Autocorrelation of noisy sinusoidal signals, at various SNR levels}
+
+It can be easily noticed how the periodic peaks in the auto-correlation plots become fainter, as the SNR decreases.
+In the last two plots, only a major peak at $k=0$ is visible, showing how the signal is mainly composed of noise and therefore uncorrelated with itself.
+The distance of the peaks in the first two plots corresponds to the period of the sinusoidal component of the signal.

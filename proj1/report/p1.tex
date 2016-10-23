@@ -12,22 +12,32 @@ They can be used to return a single scalar when called with no parentheses, or a
 
 
 \subsection{\code{hist}}
-The MATLAB function \code{hist} is used to generate the histogram of a sequence of numbers, i.e. the blabla.
-It support the following arguments:
+The MATLAB function \code{hist} is used to generate the histogram of a sequence of numbers, i.e. the distribution of the values within a series of non-overlapping intervals called bins.
+The histogram of a dataset can be used to estimate its probability distribution.
+
+The function supports the following arguments:
 \begin{description}
-	\item[]
-	\item[]
+	\item[x] mandatory argument representing the input data
+	\item[nbins] number of bins into which the data is divided
+	\item[xbins] vector containing the center value of each bin
+\end{description}
+
+The following return values can be retrieved:
+\begin{description}
+	\item[none] if no assignment is specified, the function plots the histrogram
+	\item[count] vector containing number of elements in each bin
+	\item[centers] vector containing the center value of each bin; can be used, together with count, to manually plot the histogram
 \end{description}
 
 
 \subsection{Examples}
 Here there will be shown example usages of the two functions, and proofs of their properties.
-The following code snippets generate a vector of 1000 numbers using \code{rand} and \code{randn} respectively, calculates their mean value and plot the histogram of the sequence.
+The following code snippets generate a vector of 1000 numbers using \code{rand} and \code{randn} respectively, calculates their mean value and plot the histogram of the sequence with 10 bins.
 
 \begin{lstlisting}[language=Octave]
 a = rand(1000, 1);
 mean(a)
-hist(a)
+hist(a, 10)
 \end{lstlisting}
 \fig{5cm}{histrand.png}{Histogram of rand function}
 
@@ -38,7 +48,7 @@ The mean of the sequence is very close to 0.5.
 a = randn(1000, 1);
 mean(a)
 std(a)
-hist(a)
+hist(a, 10)
 \end{lstlisting}
 \fig{5cm}{histrandn.png}{Histogram of randn function}
 
@@ -47,12 +57,115 @@ The mean of the sequence is very close to 0, and its standard deviation to 1.
 
 
 \subsection{\code{randn} and normal probability density function}
-In the following section, it will be shown how the values returned by \code{randn} follow the probability density function blabla.
+In the following section, it will be shown how the values returned by \code{randn} follow the probability density function of the normal distribution, which is given by the formula:
+
+\begin{equation}
+	\mathcal{N}(\mu, \sigma^2) = \frac{1}{\sqrt{2*\sigma^2*pi}} * \exp(-(x-\mu)^2 / (2*\sigma^2))
+\end{equation}
+
+The following code generates a sequence of numbers using \code{randn}, calculates its normalized histogram, and then plots it along with an approximated probability density.
+These operations are performed with the standard normal distribution, and with example values of $\mu$ and $\sigma$.
 
 \begin{lstlisting}[language=Octave]
-a = randn(1000, 1);
-mean(a)
-std(a)
-hist(a)
+clear;
+hold off;
+clf;
+
+title({'Histogram and probability density'})
+figure(1)
+
+% simulation parameters
+avg = [0, 2, -5, .5];
+sigma = [1, 5, .5, .1];
+sigma2 = sigma.^2;
+bins = 1000;
+
+for i = 1:length(avg)
+  % generate random sequence of normally-distributed numbers
+  a = avg(i) + randn(1e6, 1) * sigma(i);
+  % generate its histogram
+  [hh, xx] = hist(a, bins);
+
+  % generate probability density function
+  x = linspace(min(a), max(a), bins);
+  px = 1/sqrt(2*sigma2(i)*pi) * exp(-(x-avg(i)).^2 / (2*sigma2(i)));
+
+  % plot histogram and probability density function
+  subplot(1,length(avg),i)
+  hold on;
+  binwidth = xx(2)-xx(1);
+  plot(xx, hh/(sum(hh)*binwidth), ":g")
+  plot(x, px, ":b")
+  txt = sprintf('{ \\sl N(%.2f, %.2f)}', avg(i), sigma2(i));
+  legend({"hist()", txt})
+  hold off;
+end
 \end{lstlisting}
-\fig{5cm}{histrandn.png}{Histogram of randn function}
+\fig{7cm}{p1a.png}{Examples of histograms of normally distributed values and PDF}
+
+As it can be seen in the figure above, the curves on each plot closely match, indicating that the assumption hold true.
+
+
+\subsection{Gaussian noise and sinusoidal signals}
+This section will analyze the effects of noise contamination using sinusoidal signals as reference.
+
+The following code generates three sinewaves with the same frequency and varying phases.
+These waves are to be considered sampled versions of their continuous equivalents.
+They are then normalized in order to have a power of 1 mW.
+Subsequently, four gaussian noise signals are generated using the \code{randn} function, and scaled to have powers of 1, 10, 100 mW and 1 W respectively.
+The noise signal are summed to the original sinewaves, and plotted.
+
+\begin{lstlisting}[language=Octave]
+clear;
+hold off;
+clf;
+
+title({'Gaussian noise and sinusoidal signals'})
+figure(1)
+
+% simulation parameters
+fs = 44100;
+f = 1000;
+ph = [0 pi/2 pi];
+pwr = [.001 .01 .1 1];
+
+% create a time vector
+n = 0:100-1;
+
+% generate and normalize 3 sine signals
+sig = zeros(length(n), 3);
+for i = 1:3
+  sig(:,i) = sin(2*pi*f*n/fs + ph(i));
+  sig_norm(:,i) = sig(:,i) / std(sig(:,i)) * sqrt(1e-3);
+end
+
+% plot signals with legend
+subplot(length(pwr)+1,1,1)
+plot(n, sig_norm)
+legend({'{sin(\omega*T_s*n)}',
+  '{sin(\omega*T_s*n + \pi/2)}',
+  '{sin(\omega*T_s*n + \pi)}'})
+
+for i = 1:length(pwr)
+  % generate noise signal
+  noise = randn(1, length(n))';
+  % normalize signal
+  noise_norm = noise / std(noise) * sqrt(pwr(i));
+
+  % sum sines and noise
+  sig_noise = sig_norm + noise_norm;
+  % calculate SNR
+  snr(i,:) = var(sig_norm)/var(noise_norm);
+
+  % plot noisy signals
+  subplot(length(pwr)+1,1,i+1)
+  plot(n, sig_noise)
+end
+
+% print SNRs
+snr
+\end{lstlisting}
+\fig{9cm}{p1b.png}{Examples of sinusoidal signals and noise, at various SNR levels}
+
+The figure above shows how difficult it becomes to discern the original sine signal from the noise, let alone identifying its phase.
+Moreover, the calculated SNRs match the expected values of 1, 0.1, 0.01, and 0.001.

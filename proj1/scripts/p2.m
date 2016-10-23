@@ -3,9 +3,10 @@ hold off;
 clf;
 pkg load signal
 
-title({'';''})
+title({'Autocorrelation of noisy sinusoidal signals'})
 figure(1)
 
+% simulation parameters
 fs = 44100;
 f = 1000;
 ph = [0 pi/2 pi];

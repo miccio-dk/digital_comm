@@ -58,7 +58,7 @@
 		\begin{figure}
 		\includegraphics[width=0.8\textwidth]{figure-text7.png}
 		\end{figure}
-		\end{frame}				
+		\end{frame}
 			\begin{frame}
 			\begin{itemize}
 			\item Whether  a source is purely digital or analog that converted to digital , it may be advantegous to add or remove redundant  digits to the digital signal. This process referred as forward error-correction coding
@@ -67,7 +67,7 @@
 			\item Also if the system has a periodic signal and synching with transmitted sequence of digital signals than system will be synchronous if not, system will be called asynchronous.
 			\end{itemize}
 			\end{frame}
-			
+
 			\begin{frame}
 			\frametitle{Baseband Data Tranmission In White Gaussian Noise}
 			\begin{itemize}
@@ -75,30 +75,78 @@
 			\item Practical way of determining this is to pass the signal-pulse noise through a lowpass predectition filter. If the sample greater than zero than A was transmitted if not , -A was transmitted.
 			\end{itemize}
 			\end{frame}
-			
+
 			\begin{frame}
 			\begin{figure}
 			\includegraphics[width=0.5\textwidth]{9.png}
 			\includegraphics[width=0.5\textwidth]{9-1.png}
 			\end{figure}
 			\end{frame}
-			
+
 			\begin{frame}
 			\frametitle{How well does this receiver will perform ?}
 			\begin{itemize}
-			\item As we discussed before ,useful criterion of performance is probability of error. 
+			\item As we discussed before ,useful criterion of performance is probability of error.
 			\item Probability of error through approximation is: $P_E= Q *\sqrt{2*A^2*T/N_o}$
 			\item Our important parameters are; $A^2*T/N_0=z$
 			\item $E_b$ is called the energy per bit that carries one bit of information.
 			\item We also now that rectangular pulse of duration T seconds ahas amplitude spectrum $ATsincTf$ and that $B_p=1/T$ is a rough measure of it's bandwidth. Thus our calculation will become: $E_b/N_o=A^2/N_o*(1/T)=A^2/(N_0*B_p)$. This can be interpreted as the ratio of signal power to noise power in the signal bandwidth.
 			\end{itemize}
 			\end{frame}
-			
+
 			\begin{frame}
 			\frametitle{Plot of of $P_E$ versus z}
 			\begin{figure}
-			\includegraphics[width=0.5\textwidth]{P_E graph.png}
+			\includegraphics[width=0.5\textwidth]{P_Egraph.png}
 			\end{figure}
 			\end{frame}
-			\end{document}
-			
+
+	\begin{frame}
+		\frametitle{Binary data with arbitrary signal shapes - bit detection and noise}
+		\begin{itemize}
+			\item Bit values represented by arbitrary signals: $ s_1(t) $ and $ s_2(t) $
+			\item Received signal $ y(t) $ can be either $ s_1(t)+n(t) $ or $ s_2(t)+n(t) $
+			\item Signal goes into filter $ H(f) $, output is $ v(t) = n_0(t) + s_{01}(t) or s_{02}(t) $
+			\item If $v(T) > k$, $ s_2(t) $ was sent, otherwise $ s_1(t) $ was sent
+			\item Error occurs if:
+			\begin{itemize}
+				\item $s_1(t)$ was sent but $ v(T) = n_0(T) + s_{01}(T) > k $
+				\item $s_2(t)$ was sent but $ v(T) = n_0(T) + s_{02}(T) < k $
+			\end{itemize}
+		\end{itemize}
+		\begin{figure}
+			\includegraphics[width=\textwidth,keepaspectratio,center]{recvr.png}
+		\end{figure}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Binary data with arbitrary signal shapes - error probability}
+		\begin{itemize}
+			\item $N = n_0(T)$ is a stationary gaussian random variable with:
+			\begin{itemize}
+				\item $\mu = 0$
+				\item $\sigma^2 = \int_{-\infty}^{\infty} \frac{1}{2}N_0|H(f)|^2 df$
+			\end{itemize}
+			\item Sampler output is also a stationary gaussian random variable:
+			\begin{itemize}
+				\item $\mu = s_{01}(t)$ or $\mu = s_{02}(t)$
+				\item $\sigma^2$ same as N
+			\end{itemize}
+			\item Probability of error given $s_1(t)$: $ \int_k^{\infty}{\frac{e^{-(v-s_{01}(T))^2 / 2\sigma_0^2}}{\sqrt{2\pi\sigma_0^2}} dv} $
+			\item Average probability of error: $ P_E = \frac{1}{2}P(E|s_1(t)) + \frac{1}{2}P(E|s_2(t)) $
+		\end{itemize}
+		\begin{figure}
+			\includegraphics[width=\textwidth,keepaspectratio,center]{prob_distr.png}
+		\end{figure}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Binary data with arbitrary signal shapes - error probability 2}
+		\begin{itemize}
+			\item Probability of error can be reduced by choosing optimal value of $k$
+			\item If symbols are equally likely, the optimal value of $k$ lies at the interception of the probability distribution functions, i.e. $ k_{opt} = \frac{s_{01}(T) + s_{02}(T)}{2} $
+			\item The average probability of error becomes: $ P_E = Q(\frac{s_{01}(T) + s_{02}(T)}{2\sigma_0}) $
+			\item $ P_E $ decreases when the distances between $s_{01}(T)$ and $s_{02}(T)$ increases
+		\end{itemize}
+	\end{frame}
+\end{document}

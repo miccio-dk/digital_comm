@@ -58,11 +58,24 @@
 		\item 1 encoded as no change of state
 	\end{itemize}
 	\begin{figure}
-		\includegraphics[width=\textwidth]{9_3_1.png}
-		\includegraphics[width=\textwidth]{9_3_1.png}
+		\includegraphics[width=\textwidth]{9_3_1.png} \\
+		\includegraphics[width=\textwidth]{9_4_1.png}
 	\end{figure}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Differential Encoding Message Sequence}
+	\begin{itemize}
+		\item Implementation of differentially coherent demodulator is shown in figure 4.
+		\item The reference signal and noise passed through a bandpass filter and then correlated by bit by bit of the signal plus noise.
+		\item After the reference bit and plus the first encoded bit, signal input become $S_1=A \cos(\omega_c) t$ and $R_1=A*cos(w_c)*t$
+		\item Than the output correlator is; $v_1= \int_{0}^{T} A^2 \cos^2(\omega_c t) dt$ which eventually become $\frac{1}{2} A^2 T$
+		\item The optimum detector for binary will become  $l= x_k x_k-1 +y_k y_k-1$
+	\end{itemize}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{9_4_1.png}
+\end{frame}
+		
 
 % ch 9.5
 \begin{frame}

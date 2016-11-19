@@ -1,0 +1,48 @@
+% document infos
+\documentclass[12pt, a4paper, oneside, final]{article}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{hyperref}
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\makeatletter
+\newcommand*{\centerfloat}{%
+  \parindent \z@
+  \leftskip \z@ \@plus 1fil \@minus \textwidth
+  \rightskip\leftskip
+  \parfillskip \z@skip}
+\makeatother
+
+\newcommand{\fig}[3]{
+  \begin{figure}[H]
+  \centerfloat
+    \includegraphics[width=\textwidth,height=#1,keepaspectratio]{figures/#2}
+    \caption{#3}
+  \end{figure}
+}
+
+\title{The Q Function and Baseband Data Communication}
+\author{Eren Can Gungor \\
+  Riccardo Miccini  \\
+  Technical University of Denmark - DTU \\
+	}
+\date{\today}
+
+
+% here it starts!
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\include{p1}
+
+\include{p2}
+
+\include{p3}
+
+\end{document}

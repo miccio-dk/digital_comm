@@ -76,16 +76,19 @@
 \end{frame}
 
 
-% ch A.3
+<<<<<<< HEAD
+=======
+% ch A.2.3
 \begin{frame}
 	\frametitle{Free Space Propagation Example}
 	\begin{itemize}
 		\item As a final work for the noise calculation, we will investigate the "free-space electromagnetic-wave propagation channel.
 		\item To understand it fully on a practical example, we will investigate the communication tie between a synchronous-orbit relay satellite and a low-orbit satellite.
-	\end{itemize}
+		\end{itemize}
 \end{frame}
 
 
 
 
+>>>>>>> 64a55b451257fc8a24b434e0ce2a4ff04b5a1b25
 \end{document}

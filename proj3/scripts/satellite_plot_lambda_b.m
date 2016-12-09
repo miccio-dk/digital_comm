@@ -15,9 +15,10 @@ bt_b_db = 3;
 %%% input parameters
 d = 41e6;
 % frequency: logaritmically spaced values between 300MHz and 300GHz (RF range)
-f = 3*logspace(8, 11, 50);
-% bandwidth: logaritmically spaced values between 10kHz and 100kHz
-bw = logspace(1, 2, 50)*1000;p_t = 100;
+f = 3.*logspace(8, 11, 50);
+% bandwidth: logaritmically spaced values between 10kHz and 10kMHz
+bw = logspace(1, 4, 50).*1000;
+p_t = 100;
 g_t_db = 30;
 a_r = 0;
 g_r_db = 0;

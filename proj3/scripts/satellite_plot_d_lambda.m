@@ -13,10 +13,10 @@ c = 299792458;
 bt_b_db = 3;
 
 %%% input parameters
-% distance: logaritmically spaced values between 1km and 10km
+% distance: logaritmically spaced values between 1km and 100000km
 d = logspace(3, 8, 50);
 % frequency: logaritmically spaced values between 300MHz and 300GHz (RF range)
-f = 3*logspace(8, 11, 50);
+f = 3.*logspace(8, 11, 50);
 bw = 50e3;
 p_t = 100;
 g_t_db = 30;

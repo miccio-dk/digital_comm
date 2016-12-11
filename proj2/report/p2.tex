@@ -29,6 +29,7 @@ As we have explained and investigated probability density density function above
 \end{itemize}
 \subsection{Preparing a script file for plotting the $Q(u)$ function for argument values of relevance to the detection problems for digital communication receivers and inserting them in Appendix 2.3 and 2.4 }
 Script file that has been created for the assignment 2.3 and 2.4 has been added to the Appendix. Important concept has been explained and relevant digital communication input values specified.
+\subsection{2.5}
 
 
 
@@ -48,12 +49,15 @@ The code belows computes and graphs normal( Gaussian) probability density functi
 \begin{lstinputlisting}[language=Octave]{../scripts/2/graphingpdf.m}
 \end{lstinputlisting}
 
-\begin{lstinputlisting}[language=Octave]{../scripts/2/qfunction.m}
 
-For the question 2.3 and 2.4 we have created the following graph below. This code will plot the $Q(u)$ function for argument values relevant to the digital communication receivers. As we know from previous chapters that there are two common argument values :
+For the question 2.3 and 2.4 we have created the following code below. This code will plot the $Q(u)$ function for argument values relevant to the digital communication receivers. As we know from previous chapters that there are two common argument values :
 \begin{itemize}
 	\item $R_12=0 $ (Orthogonal Signals) 
 	\item $R_12=-1$ (Antipodal Signals)
+\end{itemize}
 We also used $z_db$ for the ratio for $E_b/N_o$. We should also notice that $z_db$ is dimensionless ratio.
 
 After that we have investigated the graph for further investigation to see whether we have achieved a satisfactory results for the assignment 2.3 and 2.4. Mathematical calculations are matching up with MATLAB simulation results.
+
+\begin{lstinputlisting}[language=Octave]{../scripts/2/qfunction.m}
+\end{lstinputlisting}

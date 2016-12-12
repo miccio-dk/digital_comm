@@ -19,7 +19,7 @@ Also general formula for gaussian pdf is ;
 y=$f(x|\mu,\sigma)=(\frac{1}{\sigma \sqrt{2 \pi}}) e^{\frac{-(x-\mu)^2}{2(\mu)^2}}$
 As we can see and understand from the variables above and the formula that all variables has been specified and we only need $\sigma$, $\mu$ and range.
 
-\subsection{Explanation of Q(u) function in relation to the normal probability density function }
+\subsection{Explanation of Q(u) function in relation to the normal probability density function 2.2 }
 As we have explained and investigated probability density density function above . We can easily link $Q(u)$ function by exploiting the properties of cumulative distribution function and Probability density function.
 \begin{itemize}
 	\item Q function is the 1- minus the cumulative distribution function of the standardised normal variable.
@@ -27,7 +27,11 @@ As we have explained and investigated probability density density function above
 	\item And corresponding cumulative distribution function become; $P=\int_{-\inf}^{x} Z$
 	\item In last step Gaussian $Q$ function defined as $Q(x)=1-P(x)=\int_{x}^{-\inf} Z$
 \end{itemize}
-\subsubsection{Preparing a script file for plotting the $Q(u)$ function for argument values of relevance to the detection problems for digital communication receivers  }
+\subsection{Preparing a script file for plotting the $Q(u)$ function for argument values of relevance to the detection problems for digital communication receivers and inserting them in Appendix 2.3 and 2.4 }
+Script file that has been created for the assignment 2.3 and 2.4 has been added to the Appendix. Important concept has been explained and relevant digital communication input values specified.
+\subsection{2.5}
+
+
 
 
 
@@ -36,10 +40,25 @@ As we have explained and investigated probability density density function above
 
 
 \subsection{Plots}
+Plotting for the questions 2.3 and 2.4
+\fig{9cm}{question2_32_4.png}{Plot for the $Q(u)$ function relevant to the argument values  for the detection problems for digital communication receivers}
 \section{Source Code}
 Here we have the properly prepared MATLAB codes for the second part of the second project. It has been used for observations, calculations and comparing with specified commands that given in this project.
 
 The code belows computes and graphs normal( Gaussian) probability density function (pdf) in an appropriate intervals
 
 \begin{lstinputlisting}[language=Octave]{../scripts/2/graphingpdf.m}
+\end{lstinputlisting}
+
+
+For the question 2.3 and 2.4 we have created the following code below. This code will plot the $Q(u)$ function for argument values relevant to the digital communication receivers. As we know from previous chapters that there are two common argument values :
+\begin{itemize}
+	\item $R_12=0 $ (Orthogonal Signals) 
+	\item $R_12=-1$ (Antipodal Signals)
+\end{itemize}
+We also used $z_db$ for the ratio for $E_b/N_o$. We should also notice that $z_db$ is dimensionless ratio.
+
+After that we have investigated the graph for further investigation to see whether we have achieved a satisfactory results for the assignment 2.3 and 2.4. Mathematical calculations are matching up with MATLAB simulation results.
+
+\begin{lstinputlisting}[language=Octave]{../scripts/2/qfunction.m}
 \end{lstinputlisting}

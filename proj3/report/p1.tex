@@ -124,13 +124,110 @@ The MATLAB code used to generate the figures closely resembles the one used to c
 In this section, the impact of the transmitter power will be analyzed, drawing from a sequence of given values.
 All the other parameters in the link budget model will use the values in the literature examples $A.8$ and $A.9$.
 
+For transmitted power $P_T$ values of 50W, 5W, and 500mW, the bit error probability $P_E$ results in:
+
+\begin{lstlisting}[language=Octave]
+    p_e =
+        1.4062e-05   9.2684e-02   3.3768e-01
+\end{lstlisting}
+
+With a power of 50W, the bit error probability is barely adequate, while it reaches 9.3\% and 34\% at 5W and 500mW respectively.
+These last two figures would cause the transmission to be erratic beyond what is commonly considered usable.
+
+Here follows a graph of the bit error probability across a range of transmitted power values:
+
+\fig{7cm}{pt.png}{$P_E$ for different values of transmitted power}
+
+As it can be seen here, it is necessary to transmit about 60W of power in order to obtain a reliable link (bit error probability of less than 0.0001\%)
+
 
 \section{Alternative modulation methods}
+This section will explore and discuss alternative modulation techniques, and determine their properties in terms of signal-to-noise ratio and bit error probability.
 
-\subsection{Method 1: }
 
-\subsection{Method 12 }
+\subsection{Method 1: Amplitude-shift keying}
+Amplitude-shift keying (ASK) is a modulation technique which consists in gating a sinusoidal signal on or off.
+The resulting symbol waveforms are:
 
+\begin{itemize}
+	\item $0$ for a 0 bits
+	\item $A\cos(2 \pi f_c t) \Pi(\frac{t-T/2}{T})$ for 1 bits
+\end{itemize}
+
+where $\Pi(x)$ is the rectangular function, and $f_c$ is the carrier frequency.
+
+It is possible to derive the bit error probability for ASK using its generic equations:
+
+\begin{equation}
+	P_E = Q\left(\sqrt{\left(1 - R_{12}\right) \frac{E_b}{N_0}}\right)
+\end{equation}
+
+\begin{equation}
+	R_{12} = \frac{\sqrt{E_1 E_2}}{E_b}\rho_{12}
+\end{equation}
+
+\begin{equation}
+	\rho_{12} = \frac{1}{\sqrt{E_1 E_2}} \int_{-\infty}^{\infty} s_1(t) s_2(t) dt
+\end{equation}
+
+where $\rho_{12}$ is a normalized correlation coefficient which expresses how similar the two symbol waveforms are, and $R_{12}$ is related to the former.
+
+In the case of ASK modulation, it holds that $R_{12} = \rho_{12} = 0$, meaning that the bit error probability equation becomes:
+
+\begin{equation}
+	P_E = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
+\end{equation}
+
+Whilst the formula is similar to the one previously introduced for the calculation of $P_E$ in a BPSK transmission, it lacks a $\sqrt{2}$ term.
+Therefore, the signal-to-noise radio of a ASK transmission has to be 3dB higher in order to maintain the same performances.
+
+For the examined satellite link, the bit error probabilities at 50W, 5W, and 500mW would result in:
+
+\begin{lstlisting}[language=Octave]
+    p_e =
+        0.0015135   0.1742226   0.3834248
+\end{lstlisting}
+
+The values above show a considerable loss of performances when adopting ASK over BPSK.
+
+
+\subsection{Method 2: Frequency-shift keying}
+This modulation technique involves the transmission of sinusoidal waves with different frequency for each symbol.
+The resulting waveforms are:
+
+\begin{itemize}
+	\item $A\cos(\omega_c t)$ for a 0 bits
+	\item $A\cos((\omega_c + \Delta\omega) t)$ for 1 bits
+\end{itemize}
+
+For simplicity sake, it holds that:
+
+\begin{itemize}
+	\item $ \omega_c = \frac{2 \pi n}{T} $
+	\item $ \Delta\omega = \frac{2 \pi m}{T} $
+\end{itemize}
+
+where $n$ and $m$ are integer coefficients, so that the number of cycles within each symbol length $T$ is integer too.
+These assumptions result in $R_{12} = 0$, and therefore the bit probability error equations is the same as for ASK:
+
+\begin{equation}
+	P_E = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
+\end{equation}
+
+However, when deriving the $E_b / N_0$ ratio from the signal-to-noise ratio, the required bandwidth is given by $2.5 / T$, so the factor $B T_b$ becomes 2.5, or around 4dB.
+
+In the case of a FSK satellite link, the bit error probabilities at 50W, 5W, and 500mW would result in:
+
+\begin{lstlisting}[language=Octave]
+    p_e =
+        4.5830e-04   1.4726e-01   3.7014e-01
+\end{lstlisting}
+
+Although this can be seen as an improvement over the ASK system, the calculated values, corresponding to probabilities of 0.0005\%, 15\%, and 37\%, are still not adequate for a transmission link.
+
+\lstset{
+  caption=\lstname
+}
 
 \section{Source code}
 Here follows a thoroughly commented version of the MATLAB script used for the above calculations and observations.
@@ -159,4 +256,14 @@ The scripts below are used to investigate the relationships between the paramete
 The scripts below are used to investigate the impact of the transmitter power on the bit error probability.
 
 \begin{lstinputlisting}[language=Octave]{../scripts/satellite_pt.m}
+\end{lstinputlisting}
+
+
+\subsection{Alternative modulation methods}
+The scripts below are used to investigate the properties and performances of different modulation schemes.
+
+\begin{lstinputlisting}[language=Octave]{../scripts/satellite_ask.m}
+\end{lstinputlisting}
+
+\begin{lstinputlisting}[language=Octave]{../scripts/satellite_fsk.m}
 \end{lstinputlisting}

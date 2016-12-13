@@ -9,5 +9,16 @@
 \subsection{\code{c8ce1a.m}: explanation}
 
 
+\subsection{ Explain how a matched-filter receiver can be implemented by a correlator. The explanation should include the most important formulas leading to the matched filter implementation using a cross correlation Part 3.6}
+\fig{9cm}{normalgaussiangraph.png}{Normal Gaussian pdf graph with defined intervals}
 
-\subsection{}
+
+\subsection{ Explain what the consequences are with respect to a matched-filter receiver if there is noise on the timing synchronisation in the receiver Part 3.7}
+ 
+Even if we manage to recover the timing, it does not guarantee that the correct operation of data-aided frequency estimation algorithms. The reason is that for is the presence of noise on the timing synchronisation in the receiver. Due to fact that for a frequency offset in order of $1/T$ the signal will be severely distorted when it passed through the matched filter. Severely distorted matched filter will not able to maximise the signal to noise ratio in the presence of additive noise.
+
+\subsubsection{Example for the Part 3.7}
+
+For example, if our noise signal is delta, sampling the matched filter?s output at some time $T+\delta$ ( where  represents a receiver timing offset due to introduction of noise) will significantly reduce the effective SNR seen by subsequent receiver blocks. This example that linked to theory above proves that it is important to keeping receiver timing offset close to zero as possible and thus delivers motivation for the inclusion of a timing recovery loop in the receiver.
+
+

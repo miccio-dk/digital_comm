@@ -7,14 +7,58 @@
 
 
 \subsection{\code{c8ce1a.m}: explanation}
-
+\subsection{
+\subsection{Apply the following correlation coefficients in the c9ce1a script  $[-1 -0.75 -0.5 0 0.5 0.75 0. 8 .995]$ and insert the resulting plot in the project report. Explain the plot and verify that it is correct 3.5}
+ \fig{9cm}{question351.png}{$P_E$ over $E_b/N_o$ graph for investigating how it will change with introduced correlation coefficients}
+%tomorrow explain with providing the book graph example.
 
 \subsection{ Explain how a matched-filter receiver can be implemented by a correlator. The explanation should include the most important formulas leading to the matched filter implementation using a cross correlation Part 3.6}
 \fig{9cm}{correlator_matched_filter.png}{Correlator Matched Filter}
 As we can from the Figure 3 that we can implement the matched filter by implementing the correlation detectors. The cross-correlator does the cross-correlation between the noisy signal and noiseless signal. 
 
-If we look at the matched filter, it does the convolution between the received signal and the time-reversed copy of the reference signal. We can mathematically prove that both matched filter and the cross-correlator will give us same output signal values.
+If we look at the matched filter, it does the convolution between the received signal and the time-reversed copy of the reference signal. We can mathematically prove that both matched filter and the cross-correlator will give us same output signal values. To prove this we will derive mathematical  derivation. 
 
+Suppose we have received $r(t)$ and is passed through parallel bank of $N$ ?crosscorrelators? which basically compute the prediction of $r(t)$ onto the $N$-basis functions as $f_n(t)$.This  can be seen in Figure 3.
+
+For cross-correlator  signal is now represented by $s_m(t)$ with components $s_{mk}(t)$. $s_{mk}(t)$ values depend on how many $M_{signal}$ is transmitted. Now other components of cross-correlator will be explained below for the mathematical derivation for  the output signal.
+
+\begin{itemize}
+	\item $\int_{0}^{T} r(t) f_k(t)=\int_{0}^{T} [s_m(t)+n(t)] f_k(t) dt$
+	\item $r_k(t)=s_m(t)+n_k(t)$
+	\item $\int_{0}^{T} s_m(t) f_k(t) $ for the values of $k= 1,2,3,4,5,...$
+	\item $\int_{0}^{T} n(t) f_k(t) $ for the values of $k=1,2,3,4,5.....$
+\end{itemize}
+
+Now our signal has been represented by the $s_m(t)$ and the $n(k)$ (random variables as noise)
+
+Now the signal can be represent $r(t)$ as
+
+\begin{itemize}
+	\item $r(t)= \sum\limits_{k=1}^N = s_m(t) f_k(t)+ n(t)'+\sum\limits_{k=1}^N = n_k(t) f_k(t)$
+	\item $\sum\limits_{k=1}^N = r_k(t) f_k(t)$
+\end{itemize}
+
+As we can see that $n(t)'$ is irrelevant to which signal is going to transmitted. The decision will be made upon entirely on correlator output and the basis functions. 
+
+Now we can compare with Matched filter output. 
+
+For matched filter, we use $N$ bank linear filters. Impulse responses of the $N$ filters are;
+\begin{itemize}
+	\item $h_k(t)=f_k(T-t)$ for invertals between , $0<t<T$
+\end{itemize}
+
+The output filters become:
+\begin{itemize}
+	\item $y_k(t)=\int_{0}^{T} r(\tau) f_k(T-\tau)d(\tau)$
+	\item $\int_{0}^{T} r(\tau) f_k(T-t+\tau)d(\tau)$ for the $k= 1,2,3,4,5,...N$
+\end{itemize}
+If we sample outputs of the linears at $t=T$
+\begin{itemize}
+\item $y_k(T)=\int_{0}^{T} r(\tau) f_k(\tau)d(\tau)$ which will eventually become $r_k$
+\end{itemize}
+
+Hence our theoritical approach has been proved by mathematical derivation of matched filter and cross-correlator. Both have same output even though calculations have been done in a different way for both.
+	
 \subsection{ Explain what the consequences are with respect to a matched-filter receiver if there is noise on the timing synchronisation in the receiver Part 3.7}
  
 Even if we manage to recover the timing, it does not guarantee that the correct operation of data-aided frequency estimation algorithms. The reason is that for is the presence of noise on the timing synchronisation in the receiver. Due to fact that for a frequency offset in order of $1/T$ the signal will be severely distorted when it passed through the matched filter. Severely distorted matched filter will not able to maximise the signal to noise ratio in the presence of additive noise.
@@ -22,5 +66,10 @@ Even if we manage to recover the timing, it does not guarantee that the correct 
 \subsubsection{Example for the Part 3.7}
 
 For example, if our noise signal is delta, sampling the matched filter?s output at some time $T+\delta$ ( where  represents a receiver timing offset due to introduction of noise) will significantly reduce the effective SNR seen by subsequent receiver blocks. This example that linked to theory above proves that it is important to keeping receiver timing offset close to zero as possible and thus delivers motivation for the inclusion of a timing recovery loop in the receiver.
+\subsection{Plots}
 
+\subsection{Source Code}
+For the question 3.5 following code has been created to take relevant correlation coefficients
+\begin{lstinputlisting}[language=Octave]{../scripts/2/question35.m}
+\end{lstinputlisting}
 

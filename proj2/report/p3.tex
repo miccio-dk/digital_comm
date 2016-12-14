@@ -7,16 +7,16 @@ Firstly, we will use the block diagram below to explain important variables for 
 
 A matched filter is achieved by correlating a known signal(reference signal) with an unknown signal to detect the presence of the template in the unknown signal. The matched filter is the $"optimal"$ linear filter for maximising the SNR( signal-to-noise ratio) in the presence of additive stochastic noise. In this specific case, our additive noise is white gaussian noise.
 
-The matched filter with AWGN is used in communication systems that sends binary messages from transmitter to receiver through AWGN channel.  It is important to firstly define error analysis for general binary noise signals as we try to optimise signal to noise ratio.
+The matched filter with AWGN is used in communication systems that sends binary messages from transmitter to receiver through AWGN channel.  It is important to firstly define error analysis for general binary noise signals as we try to optimise signal to noise ratio for the filter.
 
 For general error analysis for binary signals in noise are;
 \begin{itemize}
-	\item Receive $0 send 1$
-	\item Receive $1\rightarrow send 0$
+	\item Receive $0$ sends $1$
+	\item Receive $1$ sends $0$
 \end{itemize}
-The received signal is filtered i and filter output is sampled every T seconds. As we can see that threshold will decide which signal it will pass with gain $k$.
+After we received and processed binary signals. The received signal is filtered and filter output is sampled every T seconds. As we can see from the figure that threshold will decide which signal it will pass with respect to gain $k$.
 
-To understand this concept further from error analysis following important steps has been derived. Those are
+To understand this concept further from error analysis following important variables has been considered. Those are
 \begin{itemize}
 	\item Minimize the average probability error
 	\item Choose the optimal threshold
@@ -30,7 +30,25 @@ As we know that $P_E$ is a function of the difference between two signals.Theref
 Solution for that would be  $h_0(t)=s_2(T-t)-s_1(T-t)$
 As we can see that the optimum filter related to  only the input signals.
 
-To see if our block diagram and variables are satisfied the principles of matched filer that we have explained above. We will drive formulas for optimum filter and error probability.
+Important variables has been derived below to see how important they are for the system and enhance our understanding of the block diagram . We will drive formulas for optimum filter and error probability.
+\subsubsection{ Derivation for Error Probability for Matched Filter}
+
+Recall $P_E=Q(d/2)$ and we know that our maximum value of the distance is:
+\begin{itemize}
+	\item $d_m= \frac{2}{N_o}(E_1+E_2-2 \sqrt[]{E_1 E_2 }\rho_12)$
+\end{itemize}
+
+We know the energy formulas from the previous chapters. These energy formulas can be used to define $\rho$ formula. Following steps has been done to represent $\rho_12$ in terms of energy. 
+\begin{itemize}
+	\item $E_1= \int_{t_o}^{t_0+T} s_1^2(t) dt$
+	\item $E_2= \int_{t_o}^{t_o+T} s_2^2(t) dt$
+	\item $\rho_12=\frac{1}{\sqrt[]{E_1 E_2}} \int_{-\infty}^{\infty} s_1(t) s_2(t) dt$
+\end{itemize}
+And finalised version of Probability error will become:
+\begin{itemize}
+	\item $P_E = Q((\frac{E_1+E_2- 2\sqrt[]{E_1 E_2} \rho_12}{2 N_o})^{1/2})$
+\end{itemize}
+	
 
 
 

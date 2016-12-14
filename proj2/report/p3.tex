@@ -5,7 +5,9 @@
 \subsection{Explain the principles of a matched filter receiver for binary data in white Gaussian noise, thus using the so called AWGN (Additive White Gaussian Noise) model. The description should include a definition of all the necessary variables in the system and a block diagram 3.1}
 Firstly, we will use the block diagram below to explain important variables for the matched filter receiver for binary data in AWGN. 
 
-A matched filter is achieved by correlating a known signal(reference signal) with an unknown signal to detect the presence of the template in the unknown signal. The matched filter is the $"optimal"$ linear filter for maximising the SNR( signal-to-noise ratio) in the presence of additive stochastic noise. In this specific case, our additive noise is white gaussian noise.The matched filter with AWGN is used in communication systems that sends binary messages from transmitter to receiver through AWGN channel.  It is important to firstly define error analysis for general binary noise signals as we try to optimise signal to noise ratio.
+A matched filter is achieved by correlating a known signal(reference signal) with an unknown signal to detect the presence of the template in the unknown signal. The matched filter is the $"optimal"$ linear filter for maximising the SNR( signal-to-noise ratio) in the presence of additive stochastic noise. In this specific case, our additive noise is white gaussian noise.
+
+The matched filter with AWGN is used in communication systems that sends binary messages from transmitter to receiver through AWGN channel.  It is important to firstly define error analysis for general binary noise signals as we try to optimise signal to noise ratio.
 
 For general error analysis for binary signals in noise are;
 \begin{itemize}
@@ -28,9 +30,12 @@ As we know that $P_E$ is a function of the difference between two signals.Theref
 Solution for that would be  $h_0(t)=s_2(T-t)-s_1(T-t)$
 As we can see that the optimum filter related to  only the input signals.
 
-To see if our block diagram and variables are satisfied the principles of matched filer, we have derived Error probability for Matched Filter Receiver.
+To see if our block diagram and variables are satisfied the principles of matched filer that we have explained above. We will drive formulas for optimum filter and error probability.
 
-
+
+
+
+
 \fig{9cm}{figure_31.png}{Matched Filter for binary data in AWGN}
 
 \subsection{\code{c8ce1a.m}: explanation}

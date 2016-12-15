@@ -8,6 +8,7 @@
 \usepackage{amsmath}
 \usepackage{lmodern}% http://ctan.org/pkg/lm
 \usepackage{mathtools}
+\usepackage[font={scriptsize,it}]{caption}
 \usefonttheme{professionalfonts}
 
 % code listings format
@@ -33,7 +34,7 @@
   \begin{figure}[H]
   \centerfloat
     \includegraphics[width=\textwidth,height=#1,keepaspectratio]{figures/#2}
-    \caption{#3}
+	\caption{#3}
   \end{figure}
 }
 
@@ -55,12 +56,70 @@
 \begin{document}
 \frame{\titlepage}
 
-% slide 1
+% overview
 \begin{frame}
-	\frametitle{Title}
+	\frametitle{Overview}
 	\begin{itemize}
-		\item stuff
-		\item more stuff
+		\item Assignment 2
+		\begin{itemize}
+			\item Eye diagrams
+			\item
+			\item
+		\end{itemize}
+		\item Assignment 3
+		\begin{itemize}
+			\item Link budget model
+			\item $SNR$ and $P_E$
+			\item Alternative modulations
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+% part 2.1
+\begin{frame}
+	\frametitle{Eye diagram}
+	\begin{itemize}
+		\item Plot composed by overlaying segments of different bit sequences
+		\item Can be generated with an oscilloscope
+		\item Shows effects of \emph{inter-symbol interference}
+		\item Provides a qualitative measure of the system performance
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Eye diagram characteristics}
+	\fig{9cm}{eye1.png}{Eye diagram of BPSK signal}
+	\begin{description}
+		\item[$A$] Difference between high and low levels
+		\item[$A_j$] Difference between $A$ and the eye opening
+		\item[$T_j$] Deviations from ideal timing
+		\item[$T_b$] Bit time period
+	\end{description}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Eye diagram at different bandwidths}
+	\begin{columns}
+		\column{0.55\linewidth}
+			\fig{8cm}{eye2.png}{Eye diagram for normalized bandwidths 0.3, 0.7, 1.2}
+		\column{0.45\linewidth}
+			\begin{itemize}
+				\item Low BW: high amplitude and timing jitter
+				\item High BW: no ISI, chances of higher noise
+			\end{itemize}
+	\end{columns}
+\end{frame}
+
+% part 2.2
+
+% part 2.3
+
+% part 3
+\begin{frame}
+	\frametitle{}
+	\begin{itemize}
+		\item
+		\item
 	\end{itemize}
 \end{frame}
 

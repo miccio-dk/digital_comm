@@ -21,10 +21,10 @@ The code below generates and plots the eye diagrams of four band-limited signals
 \subsection{Channel model}
 In order to analyze the performances of a given transmission system, a model of the adopted transmission channel has to be devised.
 
-For the purpose of this simulation, the most interesting characteristic of the channel is its bandwidth, and therefore it suitability for transmitting information at a specific rate.
-The limitation in bandwidth is obtained by feeding the signal into a third-order Butterworth low-pass filter.
+For the purpose of this simulation, the most interesting characteristic of the channel is its bandwidth, and therefore its suitability for transmitting information at a specific rate.
+The limitation in bandwidth is modeled by feeding the signal into a third-order Butterworth low-pass filter.
 
-The channel is therefore characterized by its \emph{normalized bandwidth}, which represents the bandwidth as a percentage of the data bit rate; e.g if the bit rate is 8000Hz and the normalized bandwidth is 0.5, the channel will have a cutoff frequency of 4000Hz.
+The filter is characterized by its \emph{normalized bandwidth}, which represents the bandwidth as a percentage of the data bit rate; e.g if the bit rate is 8000 Hz and the normalized bandwidth is 0.5, the channel will have a cutoff frequency of 4000 Hz.
 
 The MATLAB tools for generating digital filters (\code{butter}, \code{ellip}, \code{cheby1}\dots) accepts the normalized frequency as input argument, which is the cutoff frequency in terms of the \emph{Nyquist frequency} (half of the sampling frequency).
 The normalized bandwidth is proportional to the normalized frequency by a factor equivalent to the number of samples per bit.

@@ -71,8 +71,8 @@
 		\item Assignment 2
 		\begin{itemize}
 			\item Eye diagrams
-			\item
-			\item
+			\item Q function
+			\item Matched filter
 		\end{itemize}
 		\item Assignment 3
 		\begin{itemize}
@@ -96,7 +96,7 @@
 
 \begin{frame}
 	\frametitle{Eye diagram characteristics}
-	\fig{9cm}{eye1.png}{Eye diagram of BPSK signal}
+	\fig{9cm}{eye1.png}{Eye diagram of baseband antipodal signal}
 	\begin{description}
 		\item[$A$] Difference between high and low levels
 		\item[$A_j$] Difference between $A$ and the eye opening
@@ -119,8 +119,20 @@
 \end{frame}
 
 % part 2.2
+\begin{frame}
+	\frametitle{Q function}
+	\begin{itemize}
+		\item
+	\end{itemize}
+\end{frame}
 
 % part 2.3
+\begin{frame}
+	\frametitle{Matched filters}
+	\begin{itemize}
+		\item 
+	\end{itemize}
+\end{frame}
 
 % part 3
 \begin{frame}
@@ -186,9 +198,12 @@
 		\column{0.5\linewidth}
 			\figNoCapt{2.75cm}{d_b.png}
 			\begin{itemize}
-				\item
-				\item
-				\item
+				\item $SNR$ and $P_E$ are negatively affected by:
+				\begin{itemize}
+					\item Higher distance $d$
+					\item Lower wavelength $\lambda$
+					\item Wider bandwidth $B$ (lower influence)
+				\end{itemize}
 			\end{itemize}
 	\end{columns}
 \end{frame}
@@ -207,20 +222,50 @@
 \begin{frame}
 	\frametitle{Alternative modulation: ASK}
 	\begin{itemize}
-		\item
-		\item
+		\item Amplitude-shift keying
+		\fig{2.5cm}{ask.png}{Bit stream modulated using ASK}
+		\item 0-bit represented as 0
+		\item 1-bit represented as $A\cos(2 \pi f_c t)$
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Alternative modulation: ASK ($P_E$ calculation)}
+	\begin{itemize}
+		\item Correlation coefficients:
+		\begin{itemize}
+			\item $\rho_{12} = \frac{1}{\sqrt{E_1 E_2}} \int_{-\infty}^{\infty} s_1(t) s_2(t) dt = 0$
+			\item $R_{12} = \frac{\sqrt{E_1 E_2}}{E_b}\rho_{12} = 0$
+		\end{itemize}
+		\item $SNR$ to $E_b/N_0$: conversion factor $B T_b = 2$
+		\item Bit error probability:
+	\end{itemize}
+	\begin{equation}
+		P_E = Q\left(\sqrt{\left(1 - R_{12}\right) \frac{E_b}{N_0}}\right) = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
+	\end{equation}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Alternative modulation: FSK}
 	\begin{itemize}
-		\item
-		\item
+		\item Frequency-shift keying
+		\fig{2.5cm}{fsk.png}{Bit stream modulated using FSK}
+		\item 0-bit represented as $A\cos(\omega_c t)$
+		\item 1-bit represented as $A\cos((\omega_c + \Delta \omega) t)$
+		\item Assumptions: $\omega_c = \frac{2 \pi n}{T}$ and $\Delta\omega = \frac{2 \pi m}{T}$
 	\end{itemize}
 \end{frame}
 
-
-
+\begin{frame}
+	\frametitle{Alternative modulation: FSK ($P_E$ calculation)}
+	\begin{itemize}
+		\item Correlation coefficient $R_{12} = \frac{\sqrt{E_1 E_2}}{E_b}\rho_{12} = 0$
+		\item $SNR$ to $E_b/N_0$: conversion factor $B T_b = 2.5$
+		\item Bit error probability:
+	\end{itemize}
+	\begin{equation}
+		P_E = Q\left(\sqrt{\left(1 - R_{12}\right) \frac{E_b}{N_0}}\right) = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
+	\end{equation}
+\end{frame}
 
 \end{document}

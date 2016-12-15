@@ -29,6 +29,7 @@ for k = 1:length(bw)
     kk = (i-1)*nsamp+1;
     y(kk) = x(i);
   end
+  
   % zero-order hold
   datavector = conv(y,ones(1,nsamp));
 

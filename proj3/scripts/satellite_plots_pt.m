@@ -44,7 +44,6 @@ eb_n0_db = snr_0_db + bt_b_db;
 % calculate bit error probability
 p_e = qfunc(sqrt(2 * db2pow(eb_n0_db)));
 
-
 semilogy(p_t, p_e);
 title('Bit error probability');
 xlabel({'P_T (W)'});

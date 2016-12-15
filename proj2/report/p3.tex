@@ -48,16 +48,23 @@ And finalised version of Probability error will become:
 \begin{itemize}
 	\item $P_E = Q((\frac{E_1+E_2- 2\sqrt[]{E_1 E_2} \rho_12}{2 N_o})^{1/2})$
 \end{itemize}
-	
-
-
 
 
 
 \fig{9cm}{figure_31.png}{Matched Filter for binary data in AWGN}
 
-\subsection{\code{c8ce1a.m}: explanation}
-\subsection{Extend the code in c8ce1a.m such that the number of input correlations can be up to 8. Presently 4 is the maximum of input arguments 3.4}
+\subsection{Explain the code in \code{c8ce1a.m} in greater detail than the present comments. Insert the comments directly in a renamed version of the script 3.2}
+
+Here follows a thoroughly commented version of the provided \code{question32.m} MATLAB script.
+The code below generates and calculates gain estimate,delay estimate, estimate of px, estimate of py and snr estimate in ratios by given reference and measurement sine waves.
+
+It can be seen below:
+\begin{lstinputlisting}[language=Octave]{../scripts/2/question32.m}
+\end{lstinputlisting}
+
+\subsection{3.3}
+\subsection{\code{c9ce1a.m}: Extend the code in c9ce1a.m such that the number of input correlations can be up to 8. Presently 4 is the maximum of input arguments 3.4}
+
 For the part 3.4 \code{question35.m} MATLAB code has been created. It can be seen that code is able take 8 correlation input. It is accessible from the appendix part of this report.
 \subsection{Apply the following correlation coefficients in the c9ce1a script  $[-1 -0.75 -0.5 0 0.5 0.75 0. 8 .995]$ and insert the resulting plot in the project report. Explain the plot and verify that it is correct 3.5}
  \fig{9cm}{question351.png}{$P_E$ over $E_b/N_o$ graph for investigating how it will change with introduced correlation coefficients}

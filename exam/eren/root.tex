@@ -89,8 +89,8 @@ If we look at simple basic model for the net effect at the receiver of noise in 
 
 \begin{frame}
 	\frametitle{Q2.1 Plotting gaussian pdf and explain important variables}
-Now we can put our theory in a practice in this given question, we have created the MATLAB file named "\code{graphingpdf.m} which can be accessible from the report file. 
-In this assignment important variables are
+Now we can put our theory in a practice in this given question, we have created the MATLAB file named\code{graphingpdf.m} which can be accessible from the report file. In this assignment important variables are
+
 \begin{description}
 	\item [mu] . This is the mean value ($\mu$) for the normal probability density function.
 	\item [sigma] This the sensible standard deviation number. ($\sigma$).
@@ -164,18 +164,129 @@ From the limits of the integrals in previously defined $Q(z)$ function and $erfc
 
 \begin{frame}
 	\frametitle{MATLAB code for user-defined $Q$ function}
-We also note that MATLAB does not have built in function.So we have created a MATLAB file that uses erfc function to do the calculations and simulation process related to the $Q(u)$ function. It is accesible from the Source code section under the name of \code{qfn.m}.
+We also note that MATLAB does not have built in function.So we have created a MATLAB file that uses erfc function to do the calculations and simulation process related to the $Q(u)$ function. It is accessible from the Source code section under the name of \code{qfn.m}.
 \end{frame}
 
 \begin{frame}
 	\frametitle { Assignment 2.3}
 In assignment three, we will look into optimising our filter by using the $Q$ function and error functions that we have learnt from the part 2 of this Assignment. The important things we will specifically look in these chapter are:
 \begin{itemize}
-	\item Additive White Gaussian Noise
+	\item Additive White Gaussian Noise for Matched Filter
 	\item Matched Filter
 	\item Correlator Filter
 	\item Noise and Shape related problems in Matched Filter
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Additive White Gaussian Noise for Matched Filter}
+For a working principle, The signal is multiplied by a locally stored reference copy ,and integrated over time.
+To understand the principles of a matched filter receiver for binary data in white Gaussian noise, thus using the so called AWGN (Additive White Gaussian Noise) model. We have firstly introduced the figure below.
+\fig{5cm}{figure_31.png}{AWGN for Matched Filter}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Principles of AWGN for Matched Filter}
+The matched filter correlates the incoming signal with a locally stored reference copy of the transmit waveform. The matched filter maximizes the signal-to-noise ratio for a known signal. It can be shown to be the optimal detector if
+\begin{itemize}
+	\item The channel produces Additive White Gaussian Noise (AWGN)
+	\item The channel is linear and time-invariant (LTI)
+	\item An exact time reference is available, the signal amplitude as a function of time is precisely known.
+\end{itemize}
+In our report, we have explicitly explained math behind how to apply these principles to achieve maxisimed signal to noise ratio.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Another example on how system works for AWGN Matched Filter}
+	\fig{5cm}{working_principle_mf.png} {Working Principle of AWGN Matched Filter}
+\end{frame}
+\begin{frame}
+	\frametitle{Assignment Questions that related to the Matched Filter}
+There are several questions that has been done in regards to the Matched Filter. The first question was understanding how \code{c8ce1} works as code.
+
+Firstly, code was not working properly so we have changed it and there were not enough explanation for the process and what it does.
+
+Basically code was calculating delay estimate, power in both reference vector and measurement vector, finding max for the cross-correlation matrix by using sine waves. It has both reference signal and measurement signal. We also note that measurement signal has slightly higher frequency component. For more detailed explanation and processed results can be done by running code with different given reference signal and measurement signal. It is accessible from the report.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Creating a User Defined $Q$ function}
+To run our code for assignments 3.4 and 3.5 we have created a user defined  qfn function. The code has been created as a \code{qfn.m} which can be accessible from the report.
+\end{frame}
+ 
+\begin{frame}
+	\frametitle{Question 3.4 and 3.5}
+For the questions 3.4  and 3.5 we have modified and changed the \code{ce9e1.m} MATLAB script. Code was broken and it was only taken 4 inputs. We have modified in a way that it can take up 8 inputs also we have graphed with given 8 correlation coefficients. Those were;
+$[-1, -0.75, -0.5, 0, 0.5, 0.75, 0.8 ,0.995]$ . To prove that we did correct calculation and simulation graph in the next slight can be seen.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Graph with 8 Correlation Coefficient Inputs}
+	\fig{5cm}{question351.png}{$P_E $ over $N_o$ graph for 8 correlation coefficient Inputs}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Construction of Matched filter by a Correlator}
+To understand this concept, we have provided a Correlator Match Filter below. The cross-correlator does the cross-correlation between the noisy signal and noiseless signal.
+
+The difference between Correlator and matched filter, matched filter does the convolution between the received signal and the time-reversed copy of the the reference signal but important point is both of them will give us same output. 
+	\fig{3cm}{correlator_matched_filter.png}{Correlator matched Filter}
+\end{frame}
+\begin{frame}
+	\frametitle{Cross-Correlation Functions }
 	
+\begin{itemize}
+	\item $\int_{0}^{T} r(t) f_k(t)=\int_{0}^{T} [s_m(t)+n(t)] f_k(t) dt$
+	\item $r_k(t)=s_m(t)+n_k(t)$
+	\item $\int_{0}^{T} s_m(t) f_k(t) $ for the values of $k= 1,2,3,4,5,...$
+	\item $\int_{0}^{T} n(t) f_k(t) $ for the values of $k=1,2,3,4,5.....$
+\end{itemize}
+
+Now our signal has been represented by the $s_m(t)$ and the $n(k)$ (random variables as noise)
+
+Now the signal can be represent $r(t)$ as
+
+\begin{itemize}
+	\item $r(t)= \sum\limits_{k=1}^N = s_m(t) f_k(t)+ n(t)'+\sum\limits_{k=1}^N = n_k(t) f_k(t)$
+	\item $\sum\limits_{k=1}^N = r_k(t) f_k(t)$
+\end{itemize}
+
+As we can see that $n(t)'$ is irrelevant to which signal is going to transmitted. The decision will be made upon entirely on correlator output and the basis functions. 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Deriving Matched Filter Functions}
+Now we can compare with Matched filter output. For matched filter, we use $N$ bank linear filters. Impulse responses of the $N$ filters are;
+\begin{itemize}
+	\item $h_k(t)=f_k(T-t)$ for invertals between , $0<t<T$
+\end{itemize}
+
+The output filters become:
+\begin{itemize}
+	\item $y_k(t)=\int_{0}^{T} r(\tau) f_k(T-\tau)d(\tau)$
+	\item $\int_{0}^{T} r(\tau) f_k(T-t+\tau)d(\tau)$ for the $k= 1,2,3,4,5,...N$
+\end{itemize}
+If we sample outputs of the linears at $t=T$
+\begin{itemize}
+\item $y_k(T)=\int_{0}^{T} r(\tau) f_k(\tau)d(\tau)$ which will eventually become $r_k$
+\end{itemize}
+
+Hence our theoritical approach has been proved by mathematical derivation of matched filter and cross-correlator. Both have same output even though calculations have been done in a different way for both.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Noise on the timing Synchronization in The Receiver}
+Even if we manage to recover the timing, it does not guarantee that the correct operation of data-aided frequency estimation algorithms. The reason is that for is the presence of noise on the timing synchronisation in the receiver. Due to fact that for a frequency offset in order of $1/T$ the signal will be severely distorted when it passed through the matched filter. Severely distorted matched filter will not able to maximise the signal to noise ratio in the presence of additive noise.
+\end{frame}
+\begin{frame}
+	\frametitle{BER does not depend signal waveshape}
+\end{frame}
+
+
+
+
+	
+
+
+
 \end{document}

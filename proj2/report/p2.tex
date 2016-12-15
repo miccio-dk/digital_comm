@@ -22,11 +22,15 @@ As we can see and understand from the variables above and the formula that all v
 \subsection{Explanation of Q(u) function in relation to the normal probability density function 2.2 }
 As we have explained and investigated probability density density function above . We can easily link $Q(u)$ function by exploiting the properties of cumulative distribution function and Probability density function.
 \begin{itemize}
-	\item Q function is the 1- minus the cumulative distribution function of the standardised normal variable.
-	\item Gaussian pdf with unit variance and zero mean is $R$=$(\frac{1}{\sqrt{2 \pi}}) e^{\frac{-(x)^2}{2}}$
-	\item And corresponding cumulative distribution function become; $P=\int_{-\inf}^{x} Z$
-	\item In last step Gaussian $Q$ function defined as $Q(x)=1-P(x)=\int_{x}^{-\inf} Z$
+	\item The Gaussian probability density function of unit variance and zero mean is $Z(x)=\frac{1}{\sqrt{2\pi}} \exp(\frac{-x^2}{4t})$
+	\item And corresponding cumulative distribution function is $P(x)=\int_{-\infty}^{x} Z(t) dt$
+	\item The Gaussian $Q$ function is defined as:
+		\begin{itemize}
+			\item $ Q(x) = 1-P(x)=\int_{x}^{-\infty} Z(t) dt$
+		\end{itemize}
 \end{itemize}
+
+As we can see from the above mathematical derivation that $Q(u)$ function is directly related to gaussian probability function and cumulative distribution function.
 \subsection{Preparing a script file for plotting the $Q(u)$ function for argument values of relevance to the detection problems for digital communication receivers and inserting them in Appendix 2.3 and 2.4 }
 Script file that has been created for the assignment 2.3 and 2.4 has been added to the Appendix. Important concept has been explained and relevant digital communication input values specified.
 \subsection{2.5}

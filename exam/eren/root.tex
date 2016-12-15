@@ -1,0 +1,69 @@
+\documentclass{beamer}
+\usetheme{Berlin}
+\usecolortheme{beaver}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{amsmath}
+\usepackage{lmodern}% http://ctan.org/pkg/lm
+\usepackage{mathtools}
+\usefonttheme{professionalfonts}
+
+% code listings format
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{
+  caption=\lstname
+}
+
+% inline code
+\newcommand{\code}[1]{\texttt{#1}}
+
+% command for centering boxes
+\makeatletter
+\newcommand*{\centerfloat}{%
+  \parindent \z@
+  \leftskip \z@ \@plus 1fil \@minus \textwidth
+  \rightskip\leftskip
+  \parfillskip \z@skip}
+\makeatother
+
+% command for adding figures
+\newcommand{\fig}[3]{
+  \begin{figure}[H]
+  \centerfloat
+    \includegraphics[width=\textwidth,height=#1,keepaspectratio]{figures/#2}
+    \caption{#3}
+  \end{figure}
+}
+
+% document info
+\title{Exam presentation}
+\subtitle{Assignment 2.2 and 2.3}
+\author[Eren]{Eren~Can~Gungor\inst{1}}
+\institute[DTU]
+{
+	\inst{1}
+	Technical University of Denmark\\
+	Digital Communication
+}
+\date{\today}
+\subject{Digital Communication}
+
+
+% front page
+\begin{document}
+\frame{\titlepage}
+
+% slide 1
+\begin{frame}
+	\frametitle{Title}
+	\begin{itemize}
+		\item stuff
+		\item more stuff
+	\end{itemize}
+\end{frame}
+
+
+
+\end{document}

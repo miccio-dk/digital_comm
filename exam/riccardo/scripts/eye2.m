@@ -5,16 +5,15 @@ pkg load signal
 % simulation parameters:
 %  - nr of symbols (must be divisible by 4)
 %  - nr of samples per symbol
-%  - filter cutoff values (normalized bandwidth)
-nsym = (100)*4;
+%  - filter cutoff value (normalized bandwidth)
+nsym = 1000;
 nsamp = 50;
-bw = [0.15 0.3 0.7 1.2 4];
+bw = [0.3 0.7 1.2];
 
 % for each filter cutoff value..
 for k = 1:length(bw)
   % generate filter coefficients using one of the cutoff values
-  lambda = bw(k);
-  [b,a] = butter(3,2*lambda/nsamp);
+  [b,a] = butter(3,2.*bw(k)/nsamp);
 
   % allocate space for total bit sequence
   l = nsym*nsamp;
@@ -44,12 +43,13 @@ for k = 1:length(bw)
   % plot eye diagram
   subplot(length(bw),1,k)
   plot(datamatrix1, 'k')
-  
+
   % format: print axis labels, legend, and set plot range
   ylabel('Amplitude')
   axis([0 4*nsamp -1.4 1.4])
-  legend(['Bn = ', num2str(lambda)])
-  if k == length(bw)
+  xlabel('t/Tsamp')
+  legend(['Bn = ', num2str(bw(k))])
+  if k == 4
     xlabel('t/Tsamp')
   end
 end

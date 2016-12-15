@@ -38,6 +38,14 @@
   \end{figure}
 }
 
+% command for adding figures
+\newcommand{\figNoCapt}[2]{
+  \begin{figure}[H]
+  \centerfloat
+    \includegraphics[width=\textwidth,height=#1,keepaspectratio]{figures/#2}
+  \end{figure}
+}
+
 % document info
 \title{Exam presentation}
 \subtitle{Assignment 2.1 and 3}
@@ -116,12 +124,102 @@
 
 % part 3
 \begin{frame}
-	\frametitle{}
+	\frametitle{Link budget model}
+	\begin{itemize}
+		\item A way of estimating the power of a received signal
+		\item Takes into account all the gains and losses of transmitter, channel, and receiver
+		\begin{equation}
+			P_R = \left(\frac{\lambda}{4 \pi d}\right)^2 \frac{P_T G_T G_R}{L_0};
+		\end{equation}
+		\item In decibels:
+		\begin{equation}
+			P_{R, dB} = 20\log_{10}\left(\frac{4 \pi d}{\lambda}\right) + {ERP}_{dB} + G_{R, dB} - L_{0, dB};
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Link budget model variables}
+	\begin{description}
+		\item[$(\frac{4 \pi d}{\lambda})^2$] Free-space loss
+		\item[$ERP = P_T G_T$] Effective radiated power
+		\item[$G_R$] Gain of receiver antenna
+		\item[$L_0$] Other losses, link budget margin
+	\end{description}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$SNR$ calculation}
+	\begin{itemize}
+		\item Signal-to-noise ratio in decibels:
+	\end{itemize}
+	\begin{equation}
+		{SNR}_{dB} = P_{R, dB} - P_{int, dB}
+	\end{equation}
+	\begin{description}
+		\item[$P_R$] Calculated using link budget model
+		\item[$P_{int}$] Noise power, proportional to the receiver noise temperature and the transmission bandwidth
+	\end{description}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$P_E$ calculation}
+	\begin{itemize}
+		\item Bit error probability for BSFK transmissions:
+	\end{itemize}
+	\begin{equation}
+		P_E = Q\left(\sqrt{\frac{2E_b}{N_0}}\right)
+	\end{equation}
+	\begin{enumerate}
+		\item ratio $E_b / N_0$ derived from $SNR = \rightarrow \frac{E_b}{N_0 B T_b}$
+		\item For binary BPSK, $B = 2/T_b$
+		\item Factor $B T_b$ is 2, or 3 dB
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Impact of $d$, $\lambda$, $B$}
+	\begin{columns}
+		\column{0.5\linewidth}
+			\figNoCapt{2.75cm}{d_lambda.png}
+			\figNoCapt{2.75cm}{lambda_b.png}
+		\column{0.5\linewidth}
+			\figNoCapt{2.75cm}{d_b.png}
+			\begin{itemize}
+				\item
+				\item
+				\item
+			\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Impact of $P_T$}
+	\begin{itemize}
+		\item $P_E$ for $P_T$ at 50 W, 5 W, and 500 mW:
+	\end{itemize}
+	\begin{equation}
+		\code{1.4062e-05   9.2684e-02   3.3768e-01}
+	\end{equation}
+	\fig{4cm}{pe_over_pt.png}{$P_E$ over values of $P_T$}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Alternative modulation: ASK}
 	\begin{itemize}
 		\item
 		\item
 	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Alternative modulation: FSK}
+	\begin{itemize}
+		\item
+		\item
+	\end{itemize}
+\end{frame}
+
 
 
 

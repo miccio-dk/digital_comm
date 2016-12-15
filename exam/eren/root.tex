@@ -57,13 +57,52 @@
 
 % slide 1
 \begin{frame}
-	\frametitle{Title}
+	\frametitle{ Q function 2.2}
+In this part of the assignment we will investigate the  Normal (Gaussian) probability density function, $Q(u)$ function and it's relationship with complementary error function. It will also show how these theories will be related to the current communication systems by given assignment questions. Things we will look at are:
+	
 	\begin{itemize}
-		\item stuff
-		\item more stuff
+		\item Normal(Gaussian) Probability Density Function
+		\item $Q(u)$ function
+		\item $Q(u)$ function and it's relationship with complementary error function.
 	\end{itemize}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Probability Density Function}
+
+Normal distribution/Gaussian distribution is a really important and in fact most commonly used distribution in statistics.  It is important because:
+	\begin{itemize}
+		\item Almost all variables are distributed approximately normally. They are approximately close
+		\item Second reason is that statistical tests are derived from normal distribution and also work well if the distribution is approximately normal.
+		\item Another reason is that it is only just characterised by two variables;
+			\begin{itemize}
+				\item It's mean $\mu$ and and standard deviation $\sigma$ 
+			\end{itemize}
+	\end{itemize}
+For the communication systems;
+Noise is an error or undesired random disturbance of a useful information in communication channel.The noise is a summation of unwanted or disturbing energy from natural and sometimes man-made sources.
+\end{frame}
+\begin{frame}
+	\frametitle{Gaussian Noise}
+If we look at simple basic model for the net effect at the receiver of noise in the communication system is to assumed additive, Gaussian noise. In this model we have two signal components one is deterministic signal and  the second component is the noise term, and is a quantity drawn from a Gaussian probability distribution with mean $0$ and some variance and it is  independent of the transmitted signal.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Q2.1 Plotting gaussian pdf and explain important variables}
+Now we can put our theory in a practice in this given question, we have created the MATLAB file named "\code{graphingpdf.m} which can be accessible from the report file. 
+In this assignment important variables are
+\begin{description}
+	\item [mu] . This is the mean value ($\mu$) for the normal probability density function.
+	\item [sigma] This the sensible standard deviation number. ($\sigma$).
+	\item [MAX] 50; Maximum x value that x vector will get 
+	\item [MIN] -50; Minimum x value that x vector will get
+\end{description}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Graph for Gaussian PDF}
+\fig{5cm}{normalgaussiangraph.png}{Normal Gaussian pdf graph with defined intervals}
+\end{frame}
 
 
 \end{document}

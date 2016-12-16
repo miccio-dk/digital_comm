@@ -9,6 +9,7 @@
 \usepackage{lmodern}% http://ctan.org/pkg/lm
 \usepackage{mathtools}
 \usepackage[font={scriptsize,it}]{caption}
+\usepackage{hyperref}
 \usefonttheme{professionalfonts}
 
 % code listings format
@@ -87,6 +88,14 @@
 \begin{frame}
 	\frametitle{Eye diagram}
 	\begin{itemize}
+		\item Characteristics
+		\item Impact of bandwidth
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Eye diagram}
+	\begin{itemize}
 		\item Plot composed by overlaying segments of different bit sequences
 		\item Can be generated with an oscilloscope
 		\item Shows effects of \emph{inter-symbol interference}
@@ -118,23 +127,90 @@
 	\end{columns}
 \end{frame}
 
+
 % part 2.2
 \begin{frame}
 	\frametitle{Q function}
+	\begin{itemize}
+		\item Normal \emph{pdf}
+		\item Q function in relation to normal \emph{pdf}
+		\item Q function in relation to complementary error function
+		\item Inverse Q function
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Normal probability density function}
+	\begin{itemize}
+		\item Continuous function representing likelihood of its argument
+		\item Useful to analyze phenomena of unknown distribution due to \emph{central limit theorem}
+		\item General form:
+		\begin{equation}
+			\mathcal{N}(\mu, \sigma^2) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(x - \mu)^2}{2 \sigma^2}}
+		\end{equation}
+	\end{itemize}
+	\begin{description}
+		\item[$\mu$] Average value
+		\item[$\sigma$] Standard deviation
+	\end{description}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Q function}
+	\begin{itemize}
+		\item Represents the tail probability of  $\varphi(x)$ (standard normal distribution)
+		\item Definition of $Q(x)$ through $\varphi(x)$:
+		\begin{equation}
+			Q(x) = \frac{1}{\sqrt{2 \pi}} \int_x^\infty e^{-\frac{u^2}{2}} du
+		\end{equation}
+	\end{itemize}
+	\fig{2.5cm}{q1.png}{Relation between Q function and standard normal distribution}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Q function and complementary error function}
+	\begin{itemize}
+		\item Error function $\operatorname{erf}(x)$: probability of normally-distributed random variable $X$ ($\mu = 0$, $\sigma^2 = \frac{1}{2}$) to be in the range $[-x, x]$
+		\item Complementary error function $\operatorname{erfc}(x) = 1 - \operatorname{erf}(x)$
+		\item Definition of $Q(x)$ through $\operatorname{erfc}(x)$:
+		\begin{equation}
+			Q(x) = \frac{1}{2}\operatorname{erfc} \left(\frac{x}{\sqrt{2}} \right)
+		\end{equation}
+	\end{itemize}
+	\fig{2cm}{q3.png}{Q function (green) and complementary error function (blue)}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Inverse Q function}
+	\begin{itemize}
+		\item $Q^{-1}(x)$ is the value $u$ for which $Q(u) = x$
+		\fig{2cm}{q2.png}{Inverse Q function}
+		\item If the argument $x$ represents a bit error probability, $Q^{-1}(x)$ is proportional to the $SNR$
+	\end{itemize}
+\end{frame}
+
+
+% part 2.3
+\begin{frame}
+	\frametitle{Matched filter}
 	\begin{itemize}
 		\item
 	\end{itemize}
 \end{frame}
 
-% part 2.3
+
+% part 3
 \begin{frame}
-	\frametitle{Matched filters}
+	\frametitle{Link budget for satellite communication}
 	\begin{itemize}
-		\item 
+		\item Link budget model
+		\item $SNR$ calculation
+		\item $P_E$ calculation
+		\item Impact of of $d$, $\lambda$, $B$, and $P_T$
+		\item Alternative modulation techniques: ASK and FSK
 	\end{itemize}
 \end{frame}
 
-% part 3
 \begin{frame}
 	\frametitle{Link budget model}
 	\begin{itemize}

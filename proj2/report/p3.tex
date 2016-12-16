@@ -2,7 +2,7 @@
 
 
 
-\subsection{Explain the principles of a matched filter receiver for binary data in white Gaussian noise, thus using the so called AWGN (Additive White Gaussian Noise) model. The description should include a definition of all the necessary variables in the system and a block diagram 3.1}
+\subsection{Principles of a matched filter receiver for binary data in AWGN (Additive White Gaussian Noise) model}
 Firstly, we will use the block diagram below to explain important variables for the matched filter receiver for binary data in AWGN. 
 
 A matched filter is achieved by correlating a known signal(reference signal) with an unknown signal to detect the presence of the template in the unknown signal. The matched filter is the $"optimal"$ linear filter for maximising the SNR( signal-to-noise ratio) in the presence of additive stochastic noise. In this specific case, our additive noise is white gaussian noise.
@@ -53,7 +53,7 @@ And finalised version of Probability error will become:
 
 \fig{9cm}{figure_31.png}{Matched Filter for binary data in AWGN}
 
-\subsection{Explain the code in \code{c8ce1a.m} in greater detail than the present comments. Insert the comments directly in a renamed version of the script 3.2}
+\subsection{Explanation of the code in \code{c8ce1a.m}}
 
 Here follows a thoroughly commented version of the provided \code{question32.m} MATLAB script.
 The code below generates and calculates gain estimate,delay estimate, estimate of px, estimate of py and snr estimate in ratios by given reference and measurement sine waves.
@@ -62,14 +62,14 @@ It can be seen below:
 \begin{lstinputlisting}[language=Octave]{../scripts/2/question32.m}
 \end{lstinputlisting}
 
-\subsection{3.3}
-\subsection{\code{c9ce1a.m}: Extend the code in c9ce1a.m such that the number of input correlations can be up to 8. Presently 4 is the maximum of input arguments 3.4}
+\subsection{Create the Matlab user-defined qfn function for code c9ce1.a}
+Code has been constructed and located in the source code section of this report. It can be seen from the source part and it works perfectly with the code \code{ce9e1.m}. Detailed explanation given in the source code section.
+\subsection{\code{c9ce1a.m}: Extending  the code such that it can take 8 input arguments by given correlation coefficient inputs }
 
-For the part 3.4 \code{question35.m} MATLAB code has been created. It can be seen that code is able take 8 correlation input. It is accessible from the appendix part of this report.
-\subsection{Apply the following correlation coefficients in the c9ce1a script  $[-1 -0.75 -0.5 0 0.5 0.75 0. 8 .995]$ and insert the resulting plot in the project report. Explain the plot and verify that it is correct 3.5}
+For the part 3.4 and 3.5 \code{question35.m} MATLAB code has been created. It can be seen that code is able take 8 correlation input. It is accessible from the appendix part of this report. Given 8 correlation-coefficient inputs are $[-1, -0.75, -0.5, 0, 0.5, 0.75, 0.8, 0.995]$. Plot has been given below.
  \fig{9cm}{question351.png}{$P_E$ over $E_b/N_o$ graph for investigating how it will change with introduced correlation coefficients}
 %tomorrow explain with providing the book graph example.
-\subsection{ Explain how a matched-filter receiver can be implemented by a correlator. The explanation should include the most important formulas leading to the matched filter implementation using a cross correlation Part 3.6}
+\subsection{ Implementation of Matched filter with a Correlator that includes Cross-Correlations}
 \fig{9cm}{correlator_matched_filter.png}{Correlator Matched Filter}
 As we can from the Figure 3 that we can implement the matched filter by implementing the correlation detectors. The cross-correlator does the cross-correlation between the noisy signal and noiseless signal. 
 
@@ -116,11 +116,11 @@ If we sample outputs of the linears at $t=T$
 
 Hence our theoritical approach has been proved by mathematical derivation of matched filter and cross-correlator. Both have same output even though calculations have been done in a different way for both.
 	
-\subsection{ Explain what the consequences are with respect to a matched-filter receiver if there is noise on the timing synchronisation in the receiver Part 3.7}
+\subsection{Noise presence on the timing synchronisation in the receiver }
  
 Even if we manage to recover the timing, it does not guarantee that the correct operation of data-aided frequency estimation algorithms. The reason is that for is the presence of noise on the timing synchronisation in the receiver. Due to fact that for a frequency offset in order of $1/T$ the signal will be severely distorted when it passed through the matched filter. Severely distorted matched filter will not able to maximise the signal to noise ratio in the presence of additive noise.
 
-\subsubsection{Example for the Part 3.7}
+\subsubsection{Example}
 
 For example, if our noise signal is delta, sampling the matched filters output at some time $T+\delta$ ( where  represents a receiver timing offset due to introduction of noise) will significantly reduce the effective SNR seen by subsequent receiver blocks. This example that linked to theory above proves that it is important to keeping receiver timing offset close to zero as possible and thus delivers motivation for the inclusion of a timing recovery loop in the receiver.
 
@@ -129,6 +129,12 @@ For example, if our noise signal is delta, sampling the matched filters output a
 
 \subsection{Source Code}
 For the question 3.5 following code has been created to take relevant correlation coefficients
+
 \begin{lstinputlisting}[language=Octave]{../scripts/2/question35.m}
+\end{lstinputlisting}
+
+For the question 3.3. We have created a user-defined $q(.)$ function because in the \code{ce9e1.m} , q function has not  defined with any error functions in the code. To overcome this problem and make sure code will work. We have created the following $q(.)$ below:
+
+\begin{lstinputlisting}[language=Octave]{../scripts/2/qfn.m}
 \end{lstinputlisting}
 

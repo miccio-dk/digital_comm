@@ -57,6 +57,40 @@
 
 % slide 1
 \begin{frame}
+	\frametitle{Eye diagram}
+	\begin{itemize}
+		\item Plot composed by overlaying segments of different bit sequences
+		\item Can be generated with an oscilloscope
+		\item Shows effects of \emph{inter-symbol interference}
+		\item Provides a qualitative measure of the system performance
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Eye diagram characteristics}
+	\fig{9cm}{eye1.png}{Eye diagram of baseband antipodal signal}
+	\begin{description}
+		\item[$A$] Difference between high and low levels
+		\item[$A_j$] Difference between $A$ and the eye opening
+		\item[$T_j$] Deviations from ideal timing
+		\item[$T_b$] Bit time period
+	\end{description}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Eye diagram at different bandwidths}
+	\begin{columns}
+		\column{0.55\linewidth}
+			\fig{8cm}{eye2.png}{Eye diagram for normalized bandwidths 0.3, 0.7, 1.2}
+		\column{0.45\linewidth}
+			\begin{itemize}
+				\item Low BW: high amplitude and timing jitter
+				\item High BW: no ISI, chances of higher noise
+			\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
 	\frametitle{ Q function 2.2}
 In this part of the assignment we will investigate the  Normal (Gaussian) probability density function, $Q(u)$ function and it's relationship with complementary error function. It will also show how these theories will be related to the current communication systems by given assignment questions. Things we will look at are:
 	
@@ -296,9 +330,138 @@ And we know that $BER$ is linked to $S/N$ ratio and $Q$ function and formula is;
 Which proves the idea of that BER does not depend on signal waveshape.
 \end{frame}
 
+\begin{frame}
+	\frametitle{Link budget model}
+	\begin{itemize}
+		\item A way of estimating the power of a received signal
+		\item Takes into account all the gains and losses of transmitter, channel, and receiver
+		\begin{equation}
+			P_R = \left(\frac{\lambda}{4 \pi d}\right)^2 \frac{P_T G_T G_R}{L_0};
+		\end{equation}
+		\item In decibels:
+		\begin{equation}
+			P_{R, dB} = 20\log_{10}\left(\frac{4 \pi d}{\lambda}\right) + {ERP}_{dB} + G_{R, dB} - L_{0, dB};
+		\end{equation}
+	\end{itemize}
+\end{frame}
 
-	
+\begin{frame}
+	\frametitle{Link budget model variables}
+	\begin{description}
+		\item[$(\frac{4 \pi d}{\lambda})^2$] Free-space loss
+		\item[$ERP = P_T G_T$] Effective radiated power
+		\item[$G_R$] Gain of receiver antenna
+		\item[$L_0$] Other losses, link budget margin
+	\end{description}
+\end{frame}
 
+\begin{frame}
+	\frametitle{$SNR$ calculation}
+	\begin{itemize}
+		\item Signal-to-noise ratio in decibels:
+	\end{itemize}
+	\begin{equation}
+		{SNR}_{dB} = P_{R, dB} - P_{int, dB}
+	\end{equation}
+	\begin{description}
+		\item[$P_R$] Calculated using link budget model
+		\item[$P_{int}$] Noise power, proportional to the receiver noise temperature and the transmission bandwidth
+	\end{description}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$P_E$ calculation}
+	\begin{itemize}
+		\item Bit error probability for BSFK transmissions:
+	\end{itemize}
+	\begin{equation}
+		P_E = Q\left(\sqrt{\frac{2E_b}{N_0}}\right)
+	\end{equation}
+	\begin{enumerate}
+		\item ratio $E_b / N_0$ derived from $SNR = \rightarrow \frac{E_b}{N_0 B T_b}$
+		\item For binary BPSK, $B = 2/T_b$
+		\item Factor $B T_b$ is 2, or 3 dB
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Impact of $d$, $\lambda$, $B$}
+	\begin{columns}
+		\column{0.5\linewidth}
+			\figNoCapt{2.75cm}{d_lambda.png}
+			\figNoCapt{2.75cm}{lambda_b.png}
+		\column{0.5\linewidth}
+			\figNoCapt{2.75cm}{d_b.png}
+			\begin{itemize}
+				\item $SNR$ and $P_E$ are negatively affected by:
+				\begin{itemize}
+					\item Higher distance $d$
+					\item Lower wavelength $\lambda$
+					\item Wider bandwidth $B$ (lower influence)
+				\end{itemize}
+			\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Impact of $P_T$}
+	\begin{itemize}
+		\item $P_E$ for $P_T$ at 50 W, 5 W, and 500 mW:
+	\end{itemize}
+	\begin{equation}
+		\code{1.4062e-05   9.2684e-02   3.3768e-01}
+	\end{equation}
+	\fig{4cm}{pe_over_pt.png}{$P_E$ over values of $P_T$}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Alternative modulation: ASK}
+	\begin{itemize}
+		\item Amplitude-shift keying
+		\fig{2.5cm}{ask.png}{Bit stream modulated using ASK}
+		\item 0-bit represented as 0
+		\item 1-bit represented as $A\cos(2 \pi f_c t)$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Alternative modulation: ASK ($P_E$ calculation)}
+	\begin{itemize}
+		\item Correlation coefficients:
+		\begin{itemize}
+			\item $\rho_{12} = \frac{1}{\sqrt{E_1 E_2}} \int_{-\infty}^{\infty} s_1(t) s_2(t) dt = 0$
+			\item $R_{12} = \frac{\sqrt{E_1 E_2}}{E_b}\rho_{12} = 0$
+		\end{itemize}
+		\item $SNR$ to $E_b/N_0$: conversion factor $B T_b = 2$
+		\item Bit error probability:
+	\end{itemize}
+	\begin{equation}
+		P_E = Q\left(\sqrt{\left(1 - R_{12}\right) \frac{E_b}{N_0}}\right) = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
+	\end{equation}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Alternative modulation: FSK}
+	\begin{itemize}
+		\item Frequency-shift keying
+		\fig{2.5cm}{fsk.png}{Bit stream modulated using FSK}
+		\item 0-bit represented as $A\cos(\omega_c t)$
+		\item 1-bit represented as $A\cos((\omega_c + \Delta \omega) t)$
+		\item Assumptions: $\omega_c = \frac{2 \pi n}{T}$ and $\Delta\omega = \frac{2 \pi m}{T}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Alternative modulation: FSK ($P_E$ calculation)}
+	\begin{itemize}
+		\item Correlation coefficient $R_{12} = \frac{\sqrt{E_1 E_2}}{E_b}\rho_{12} = 0$
+		\item $SNR$ to $E_b/N_0$: conversion factor $B T_b = 2.5$
+		\item Bit error probability:
+	\end{itemize}
+	\begin{equation}
+		P_E = Q\left(\sqrt{\left(1 - R_{12}\right) \frac{E_b}{N_0}}\right) = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
+	\end{equation}
+\end{frame}
 
 
 \end{document}

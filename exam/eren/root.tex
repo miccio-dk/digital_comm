@@ -8,6 +8,8 @@
 \usepackage{amsmath}
 \usepackage{lmodern}% http://ctan.org/pkg/lm
 \usepackage{mathtools}
+\usepackage[font={scriptsize,it}]{caption}
+\usepackage{hyperref}
 \usefonttheme{professionalfonts}
 
 % code listings format
@@ -34,6 +36,14 @@
   \centerfloat
     \includegraphics[width=\textwidth,height=#1,keepaspectratio]{figures/#2}
     \caption{#3}
+  \end{figure}
+}
+
+% command for adding figures
+\newcommand{\figNoCapt}[2]{
+  \begin{figure}[H]
+  \centerfloat
+    \includegraphics[width=\textwidth,height=#1,keepaspectratio]{figures/#2}
   \end{figure}
 }
 
@@ -93,7 +103,7 @@
 \begin{frame}
 	\frametitle{ Q function 2.2}
 In this part of the assignment we will investigate the  Normal (Gaussian) probability density function, $Q(u)$ function and it's relationship with complementary error function. It will also show how these theories will be related to the current communication systems by given assignment questions. Things we will look at are:
-	
+
 	\begin{itemize}
 		\item Normal(Gaussian) Probability Density Function
 		\item $Q(u)$ function
@@ -110,7 +120,7 @@ Normal distribution/Gaussian distribution is a really important and in fact most
 		\item Second reason is that statistical tests are derived from normal distribution and also work well if the distribution is approximately normal.
 		\item Another reason is that it is only just characterised by two variables;
 			\begin{itemize}
-				\item It's mean $\mu$ and and standard deviation $\sigma$ 
+				\item It's mean $\mu$ and and standard deviation $\sigma$
 			\end{itemize}
 	\end{itemize}
 For the communication systems;
@@ -128,7 +138,7 @@ Now we can put our theory in a practice in this given question, we have created 
 \begin{description}
 	\item [mu] . This is the mean value ($\mu$) for the normal probability density function.
 	\item [sigma] This the sensible standard deviation number. ($\sigma$).
-	\item [MAX] 50; Maximum x value that x vector will get 
+	\item [MAX] 50; Maximum x value that x vector will get
 	\item [MIN] -50; Minimum x value that x vector will get
 \end{description}
 \end{frame}
@@ -150,7 +160,7 @@ Now we can put our theory in a practice in this given question, we have created 
 \end{frame}
 \begin{frame}
 	\frametitle{Linking $Q(u)$ function to Gaussian probability density function and cumulative distribution function}
-Now we can link $Q(u)$ function to Gaussian probability density function and cumulative distribution function 
+Now we can link $Q(u)$ function to Gaussian probability density function and cumulative distribution function
 \begin{itemize}
 	\item The Gaussian probability density function of unit variance and zero mean is $Z(x)=\frac{1}{\sqrt{2\pi}} \exp(\frac{-x^2}{4t})$
 	\item And corresponding cumulative distribution function is $P(x)=\int_{-\infty}^{x} Z(t) dt$
@@ -164,7 +174,7 @@ Now we can link $Q(u)$ function to Gaussian probability density function and cum
 \begin{frame}
 	\frametitle{Assignment related question for the $Q(u)$ function}
 To prove our theory behind, we have constructed the $Q(u)$ function plot that will able to take defined argument
-values of relevance to the detection problems for digital communication receivers. MATLAB filed called \code{qfunction.m} has been created for this assigment. For the next step 
+values of relevance to the detection problems for digital communication receivers. MATLAB filed called \code{qfunction.m} has been created for this assigment. For the next step
 Two important argument has been chosen for this assignment, those are:
 	\begin{itemize}
 		\item $R_12= 0 (Orthogonal Signals)$
@@ -247,7 +257,7 @@ Basically code was calculating delay estimate, power in both reference vector an
 	\frametitle{Creating a User Defined $Q$ function}
 To run our code for assignments 3.4 and 3.5 we have created a user defined  qfn function. The code has been created as a \code{qfn.m} which can be accessible from the report.
 \end{frame}
- 
+
 \begin{frame}
 	\frametitle{Question 3.4 and 3.5}
 For the questions 3.4  and 3.5 we have modified and changed the \code{ce9e1.m} MATLAB script. Code was broken and it was only taken 4 inputs. We have modified in a way that it can take up 8 inputs also we have graphed with given 8 correlation coefficients. Those were;
@@ -263,12 +273,12 @@ $[-1, -0.75, -0.5, 0, 0.5, 0.75, 0.8 ,0.995]$ . To prove that we did correct cal
 	\frametitle{Construction of Matched filter by a Correlator}
 To understand this concept, we have provided a Correlator Match Filter below. The cross-correlator does the cross-correlation between the noisy signal and noiseless signal.
 
-The difference between Correlator and matched filter, matched filter does the convolution between the received signal and the time-reversed copy of the the reference signal but important point is both of them will give us same output. 
+The difference between Correlator and matched filter, matched filter does the convolution between the received signal and the time-reversed copy of the the reference signal but important point is both of them will give us same output.
 	\fig{3cm}{correlator_matched_filter.png}{Correlator matched Filter}
 \end{frame}
 \begin{frame}
 	\frametitle{Cross-Correlation Functions }
-	
+
 \begin{itemize}
 	\item $\int_{0}^{T} r(t) f_k(t)=\int_{0}^{T} [s_m(t)+n(t)] f_k(t) dt$
 	\item $r_k(t)=s_m(t)+n_k(t)$
@@ -285,7 +295,7 @@ Now the signal can be represent $r(t)$ as
 	\item $\sum\limits_{k=1}^N = r_k(t) f_k(t)$
 \end{itemize}
 
-As we can see that $n(t)'$ is irrelevant to which signal is going to transmitted. The decision will be made upon entirely on correlator output and the basis functions. 
+As we can see that $n(t)'$ is irrelevant to which signal is going to transmitted. The decision will be made upon entirely on correlator output and the basis functions.
 \end{frame}
 
 \begin{frame}
@@ -320,7 +330,7 @@ A filter is said to be matched to signal if it's impulse responses is the time-r
 So if we combine this theory with the output $S/N$ ratio, we can see that output of the matched filter does not depend on the waveshape, but following parameter:
 \begin{itemize}
 	\item $E/N_o$
-\end{itemize} 
+\end{itemize}
 
 And we know that $BER$ is linked to $S/N$ ratio and $Q$ function and formula is;
 \begin{itemize}

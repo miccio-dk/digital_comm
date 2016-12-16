@@ -33,5 +33,3 @@ plot([0:nsym*nsamp], y)
 ylabel('Amplitude')
 axis([0 nsym*nsamp -1.4 1.4])
 xlabel('n')
-
-% find indexes of zero-crossing

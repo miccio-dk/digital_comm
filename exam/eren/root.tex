@@ -235,13 +235,7 @@ To understand the principles of a matched filter receiver for binary data in whi
 
 \begin{frame}
 	\frametitle{Principles of AWGN for Matched Filter}
-The matched filter correlates the incoming signal with a locally stored reference copy of the transmit waveform. The matched filter maximizes the signal-to-noise ratio for a known signal. It can be shown to be the optimal detector if
-\begin{itemize}
-	\item The channel produces Additive White Gaussian Noise (AWGN)
-	\item The channel is linear and time-invariant (LTI)
-	\item An exact time reference is available, the signal amplitude as a function of time is precisely known.
-\end{itemize}
-In our report, we have explicitly explained math behind how to apply these principles to achieve maxisimed signal to noise ratio.
+Received signal $y(t)$ should be passed through matched filters $s_1(T-t)$ and $s_2(T-t)$ and their difference must be sampled at $t=T$ and then a decision should be according to the optimal threshold value. $s_1(t)$ and $s_2(t)$ are original signals corresponds to binary data and $s_1(t)<s_2(t)$ is assumed. Optimal threshold value is $\frac{E_2-E_1}{2}$ where $E_2$ and $E_1$ signal energies which are finite. It can be shown to be the optimal detector if
 \end{frame}
 
 \begin{frame}
@@ -274,14 +268,12 @@ $[-1, -0.75, -0.5, 0, 0.5, 0.75, 0.8 ,0.995]$ . To prove that we did correct cal
 \end{frame}
 
 \begin{frame}
-	\frametitle{Construction of Matched filter by a Correlator}
-To understand this concept, we have provided a Correlator Match Filter below. The cross-correlator does the cross-correlation between the noisy signal and noiseless signal.
-
-The difference between Correlator and matched filter, matched filter does the convolution between the received signal and the time-reversed copy of the the reference signal but important point is both of them will give us same output.
+	\frametitle{Matched filter by a Correlator}
+Matched filter receiver is an optimum receiver structure in terms of minimum probability of error in communication systems. Derivation of the optimality of the structure is given in the book. Block diagram of matched filter output for binary data in AWGN data is given in figure below which is taken from the book page 409. 
 	\fig{3cm}{correlator_matched_filter.png}{Correlator matched Filter}
 \end{frame}
 \begin{frame}
-	\frametitle{Cross-Correlation Functions }
+	\frametitle{Cross-Correlation Functionality }
 
 \begin{itemize}
 	\item $\int_{0}^{T} r(t) f_k(t)=\int_{0}^{T} [s_m(t)+n(t)] f_k(t) dt$
@@ -466,6 +458,7 @@ $P_e=Q(\frac{E_1+E_2-2\rho \sqrt{E_1 E_2}}{2 \sigma_0}\bigg)$
 	\begin{equation}
 		P_E = Q\left(\sqrt{\left(1 - R_{12}\right) \frac{E_b}{N_0}}\right) = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
 	\end{equation}
+Whilst the formula is similar to the one previously introduced for thecalculation of $P_E$ in a BPSK transmission, it lacks a $2$ term. Therefore, the signal-to-noise radio of a ASK transmission has to be $3 dB$ higher in order to maintain the same performances.
 \end{frame}
 
 \begin{frame}
@@ -489,6 +482,8 @@ $P_e=Q(\frac{E_1+E_2-2\rho \sqrt{E_1 E_2}}{2 \sigma_0}\bigg)$
 	\begin{equation}
 		P_E = Q\left(\sqrt{\left(1 - R_{12}\right) \frac{E_b}{N_0}}\right) = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
 	\end{equation}
+	
+However, when deriving the $Eb/N0$ ratio from the signal-to-noise ratio, the required bandwidth is given by $2.5/T$, so the factor $BTb$ becomes $2.5$, or around $4 dB$.
 \end{frame}
 
 

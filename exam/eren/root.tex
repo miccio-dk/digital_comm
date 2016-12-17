@@ -101,6 +101,10 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Eye Diagram Graph}
+	\fig{8cm}{important_eye_diag.png}{Important Eye Diagram}
+\end{frame}
+\begin{frame}
 	\frametitle{ Q function 2.2}
 In this part of the assignment we will investigate the  Normal (Gaussian) probability density function, $Q(u)$ function and it's relationship with complementary error function. It will also show how these theories will be related to the current communication systems by given assignment questions. Things we will look at are:
 
@@ -231,13 +235,7 @@ To understand the principles of a matched filter receiver for binary data in whi
 
 \begin{frame}
 	\frametitle{Principles of AWGN for Matched Filter}
-The matched filter correlates the incoming signal with a locally stored reference copy of the transmit waveform. The matched filter maximizes the signal-to-noise ratio for a known signal. It can be shown to be the optimal detector if
-\begin{itemize}
-	\item The channel produces Additive White Gaussian Noise (AWGN)
-	\item The channel is linear and time-invariant (LTI)
-	\item An exact time reference is available, the signal amplitude as a function of time is precisely known.
-\end{itemize}
-In our report, we have explicitly explained math behind how to apply these principles to achieve maxisimed signal to noise ratio.
+Received signal $y(t)$ should be passed through matched filters $s_1(T-t)$ and $s_2(T-t)$ and their difference must be sampled at $t=T$ and then a decision should be according to the optimal threshold value. $s_1(t)$ and $s_2(t)$ are original signals corresponds to binary data and $s_1(t)<s_2(t)$ is assumed. Optimal threshold value is $\frac{E_2-E_1}{2}$ where $E_2$ and $E_1$ signal energies which are finite. It can be shown to be the optimal detector if
 \end{frame}
 
 \begin{frame}
@@ -246,11 +244,11 @@ In our report, we have explicitly explained math behind how to apply these princ
 \end{frame}
 \begin{frame}
 	\frametitle{Assignment Questions that related to the Matched Filter}
-There are several questions that has been done in regards to the Matched Filter. The first question was understanding how \code{c8ce1} works as code.
+There are several questions that has been done in regards to the Matched Filter. The first question was understanding how \code{c8ce1} works.
 
 Firstly, code was not working properly so we have changed it and there were not enough explanation for the process and what it does.
 
-Basically code was calculating delay estimate, power in both reference vector and measurement vector, finding max for the cross-correlation matrix by using sine waves. It has both reference signal and measurement signal. We also note that measurement signal has slightly higher frequency component. For more detailed explanation and processed results can be done by running code with different given reference signal and measurement signal. It is accessible from the report.
+Basically code was calculating delay estimate, power in both reference vector and measurement vector, finding max for the cross-correlation matrix by using sine waves. 
 \end{frame}
 
 \begin{frame}
@@ -270,14 +268,12 @@ $[-1, -0.75, -0.5, 0, 0.5, 0.75, 0.8 ,0.995]$ . To prove that we did correct cal
 \end{frame}
 
 \begin{frame}
-	\frametitle{Construction of Matched filter by a Correlator}
-To understand this concept, we have provided a Correlator Match Filter below. The cross-correlator does the cross-correlation between the noisy signal and noiseless signal.
-
-The difference between Correlator and matched filter, matched filter does the convolution between the received signal and the time-reversed copy of the the reference signal but important point is both of them will give us same output.
+	\frametitle{Matched filter by a Correlator}
+Matched filter receiver is an optimum receiver structure in terms of minimum probability of error in communication systems. Derivation of the optimality of the structure is given in the book. Block diagram of matched filter output for binary data in AWGN data is given in figure below which is taken from the book page 409. 
 	\fig{3cm}{correlator_matched_filter.png}{Correlator matched Filter}
 \end{frame}
 \begin{frame}
-	\frametitle{Cross-Correlation Functions }
+	\frametitle{Cross-Correlation Functionality }
 
 \begin{itemize}
 	\item $\int_{0}^{T} r(t) f_k(t)=\int_{0}^{T} [s_m(t)+n(t)] f_k(t) dt$
@@ -320,25 +316,39 @@ Hence our theoritical approach has been proved by mathematical derivation of mat
 
 \begin{frame}
 	\frametitle{Noise on the timing Synchronization in The Receiver}
-Even if we manage to recover the timing, it does not guarantee that the correct operation of data-aided frequency estimation algorithms. The reason is that for is the presence of noise on the timing synchronisation in the receiver. Due to fact that for a frequency offset in order of $1/T$ the signal will be severely distorted when it passed through the matched filter. Severely distorted matched filter will not able to maximise the signal to noise ratio in the presence of additive noise.
+It is possible that the exact arrival time of received signal can be in error. That causes the sampling at wrong instances of matched filter output. That means receiver is no longer an optimal receiver because system samples output different point rather than it's maximum. That will cause a decrease of the amplitude of sampled signal and therefore, signal to noise ratio will also decrease. As a result probability of error become larger in timing synchronization errors. 
 \end{frame}
 
 \begin{frame}
-	\frametitle{BER does not depend signal waveshape}
-A filter is said to be matched to signal if it's impulse responses is the time-reversed replica of that signal. This is equivalent saying that the frequency response of the the signal is the same as the amplitude response of the signal which is matched. Output is the same as the auto-correlation function of the input signal.
-
-So if we combine this theory with the output $S/N$ ratio, we can see that output of the matched filter does not depend on the waveshape, but following parameter:
+	\frametitle{Bit Error Probability in Matched Filter}
+To find out bit error probability in a system with matched filter, we first need to define threshold. $s_1(T)$ and $s_2(T)$ are the inputs to the matched filter, $s_{01}(T)$ and $s_{02}(T)$ are the outputs of the matched filter. Then the equation becomes
 \begin{itemize}
-	\item $E/N_o$
+	\item $s_{01}(T)=\int_{-\infty}^{infty} h(\lambda) s_1(T-\lambda) d \lambda $
+    	\item $ \int_{-\infty}^{infty} ( s_2(T-\lambda) - s_1(T-\lambda)) s_1(T-\lambda) d \lambda $
+	\item  $\int_{-\infty}^{infty} s_2(u) s_1(u) du - \int_{-\infty}^{\infty} (s_1(u))^2 du $
+    	\item $ \sqrt{E_1 E_2} \rho_{12} - E_1 $
 \end{itemize}
 
-And we know that $BER$ is linked to $S/N$ ratio and $Q$ function and formula is;
-\begin{itemize}
-	\item $BER= Q(\sqrt(\frac{d^2}{2 N_o }))$
-\end{itemize}
-
-Which proves the idea of that BER does not depend on signal waveshape.
 \end{frame}
+
+\begin{frame}
+\frametitle{ Continuing the derivation}
+and by the equations symmetric to the ones above we get
+$ s_{02}(T)=E_2 - \sqrt{E_1 E_2} \rho_{12}$\\
+Then optimum threshold is the average of $s_{01}$ and $s_{02}$,\\
+$ k_{opt}=\frac{1}{2}(E_2 - E_1)$\\
+We have probability of error equation
+$P_e = P(Error|s_1(t)) P(s_1(t)) + P(Error|s_2(t)) P(s_2(t))$.\\
+For the equiprobable symbol selection case we have \\
+$P_e = P(Error|s_1(t)) \frac{1}{2} + P(Error|s_2(t)) \frac{1}{2}$\\
+This can be formed as
+$P_e=Q(\frac{s_{02}(T)-s_{01}(T)}{2 \sigma_0})$ \\
+if we make the selection of threshold as $k_opt$.
+We put values of $s_{01}$ and $s_{02}$ to the equation and it becomes
+$P_e=Q(\frac{E_1+E_2-2\rho \sqrt{E_1 E_2}}{2 \sigma_0}\bigg)$
+
+\end{frame}
+
 
 \begin{frame}
 	\frametitle{Link budget model}
@@ -448,6 +458,7 @@ Which proves the idea of that BER does not depend on signal waveshape.
 	\begin{equation}
 		P_E = Q\left(\sqrt{\left(1 - R_{12}\right) \frac{E_b}{N_0}}\right) = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
 	\end{equation}
+Whilst the formula is similar to the one previously introduced for thecalculation of $P_E$ in a BPSK transmission, it lacks a $2$ term. Therefore, the signal-to-noise radio of a ASK transmission has to be $3 dB$ higher in order to maintain the same performances.
 \end{frame}
 
 \begin{frame}
@@ -471,6 +482,8 @@ Which proves the idea of that BER does not depend on signal waveshape.
 	\begin{equation}
 		P_E = Q\left(\sqrt{\left(1 - R_{12}\right) \frac{E_b}{N_0}}\right) = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
 	\end{equation}
+	
+However, when deriving the $Eb/N0$ ratio from the signal-to-noise ratio, the required bandwidth is given by $2.5/T$, so the factor $BTb$ becomes $2.5$, or around $4 dB$.
 \end{frame}
 
 

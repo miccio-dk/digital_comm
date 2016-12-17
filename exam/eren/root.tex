@@ -250,11 +250,11 @@ In our report, we have explicitly explained math behind how to apply these princ
 \end{frame}
 \begin{frame}
 	\frametitle{Assignment Questions that related to the Matched Filter}
-There are several questions that has been done in regards to the Matched Filter. The first question was understanding how \code{c8ce1} works as code.
+There are several questions that has been done in regards to the Matched Filter. The first question was understanding how \code{c8ce1} works.
 
 Firstly, code was not working properly so we have changed it and there were not enough explanation for the process and what it does.
 
-Basically code was calculating delay estimate, power in both reference vector and measurement vector, finding max for the cross-correlation matrix by using sine waves. It has both reference signal and measurement signal. We also note that measurement signal has slightly higher frequency component. For more detailed explanation and processed results can be done by running code with different given reference signal and measurement signal. It is accessible from the report.
+Basically code was calculating delay estimate, power in both reference vector and measurement vector, finding max for the cross-correlation matrix by using sine waves. 
 \end{frame}
 
 \begin{frame}
@@ -324,25 +324,39 @@ Hence our theoritical approach has been proved by mathematical derivation of mat
 
 \begin{frame}
 	\frametitle{Noise on the timing Synchronization in The Receiver}
-Even if we manage to recover the timing, it does not guarantee that the correct operation of data-aided frequency estimation algorithms. The reason is that for is the presence of noise on the timing synchronisation in the receiver. Due to fact that for a frequency offset in order of $1/T$ the signal will be severely distorted when it passed through the matched filter. Severely distorted matched filter will not able to maximise the signal to noise ratio in the presence of additive noise.
+It is possible that the exact arrival time of received signal can be in error. That causes the sampling at wrong instances of matched filter output. That means receiver is no longer an optimal receiver because system samples output different point rather than it's maximum. That will cause a decrease of the amplitude of sampled signal and therefore, signal to noise ratio will also decrease. As a result probability of error become larger in timing synchronization errors. 
 \end{frame}
 
 \begin{frame}
-	\frametitle{BER does not depend signal waveshape}
-A filter is said to be matched to signal if it's impulse responses is the time-reversed replica of that signal. This is equivalent saying that the frequency response of the the signal is the same as the amplitude response of the signal which is matched. Output is the same as the auto-correlation function of the input signal.
-
-So if we combine this theory with the output $S/N$ ratio, we can see that output of the matched filter does not depend on the waveshape, but following parameter:
+	\frametitle{Bit Error Probability in Matched Filter}
+To find out bit error probability in a system with matched filter, we first need to define threshold. $s_1(T)$ and $s_2(T)$ are the inputs to the matched filter, $s_{01}(T)$ and $s_{02}(T)$ are the outputs of the matched filter. Then the equation becomes
 \begin{itemize}
-	\item $E/N_o$
+	\item $s_{01}(T)=\int_{-\infty}^{infty} h(\lambda) s_1(T-\lambda) d \lambda $
+    	\item $ \int_{-\infty}^{infty} ( s_2(T-\lambda) - s_1(T-\lambda)) s_1(T-\lambda) d \lambda $
+	\item  $\int_{-\infty}^{infty} s_2(u) s_1(u) du - \int_{-\infty}^{\infty} (s_1(u))^2 du $
+    	\item $ \sqrt{E_1 E_2} \rho_{12} - E_1 $
 \end{itemize}
 
-And we know that $BER$ is linked to $S/N$ ratio and $Q$ function and formula is;
-\begin{itemize}
-	\item $BER= Q(\sqrt(\frac{d^2}{2 N_o }))$
-\end{itemize}
-
-Which proves the idea of that BER does not depend on signal waveshape.
 \end{frame}
+
+\begin{frame}
+\frametitle{ Continuing the derivation}
+and by the equations symmetric to the ones above we get
+$ s_{02}(T)=E_2 - \sqrt{E_1 E_2} \rho_{12}$\\
+Then optimum threshold is the average of $s_{01}$ and $s_{02}$,\\
+$ k_{opt}=\frac{1}{2}(E_2 - E_1)$\\
+We have probability of error equation
+$P_e = P(Error|s_1(t)) P(s_1(t)) + P(Error|s_2(t)) P(s_2(t))$.\\
+For the equiprobable symbol selection case we have \\
+$P_e = P(Error|s_1(t)) \frac{1}{2} + P(Error|s_2(t)) \frac{1}{2}$\\
+This can be formed as
+$P_e=Q(\frac{s_{02}(T)-s_{01}(T)}{2 \sigma_0})$ \\
+if we make the selection of threshold as $k_opt$.
+We put values of $s_{01}$ and $s_{02}$ to the equation and it becomes
+$P_e=Q(\frac{E_1+E_2-2\rho \sqrt{E_1 E_2}}{2 \sigma_0}\bigg)$
+
+\end{frame}
+
 
 \begin{frame}
 	\frametitle{Link budget model}

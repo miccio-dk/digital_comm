@@ -196,7 +196,7 @@
 	\begin{itemize}
 		\item \emph{AWGN} model
 		\item Matched filter
-		\item Implementation through cross correlation
+		\item Implementation through-cross correlation
 		\item Bit error probability $P_E$
 		\item $P_E$ at different correlation coefficients
 	\end{itemize}
@@ -227,7 +227,7 @@
 	\begin{itemize}
 		\item System for detecting incoming symbols
 		\item Improves performances in presence of AWGN
-		\item Requires reference signals $s_0(t)$ and $s_1(t)$
+		\item Requires reference signals $s_1(t)$ and $s_2(t)$
 	\end{itemize}
 	\fig{4cm}{mf_block.png}{Matched filter block diagram}
 \end{frame}
@@ -235,7 +235,14 @@
 \begin{frame}
 	\frametitle{Implementation}
 	\begin{itemize}
-		\item
+		\item Received signal $y(t)$ contains AWGN
+		\item $y(t)$ is cross-correlated with $s_1(t)$ and $s_2(t)$
+		\item Resulting signals are summed into $v(t)$ and sampled at $t = T$
+		\item $v(T)$ is compared against threshold $k_{opt}$:
+		\begin{itemize}
+			\item If $v(T) > k_{opt}$, the incoming waveform was $s_2(t)$
+			\item If $v(T) < k_{opt}$, the incoming waveform was $s_1(t)$
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 

@@ -187,27 +187,16 @@ Two important argument has been chosen for this assignment, those are:
 \end{frame}
 
 \begin{frame}
-	\frametitle{Graph for $Q(u)$ function assignment}
-\fig{5cm}{question2_32_4.png}{Plotting $Q(u)$ function relevant to detection problems in digital communication receivers}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Relationship between inverse $Q(u)$ function and Complementary Error Function }
-We know that $Q(u)$ function is :
+	\frametitle{Q inverse function and contemporary error function};
 \begin{itemize}
-	\item $Q(z) = \int_{z}^{\infty} \frac{1}{\sqrt{2 \pi}} \exp(\frac{-y^2} {2}) dy$
+	\item $Q(u)=\int\limits^{\infty}_u \frac{1}{ \sqrt{2\pi}} \exp({\frac{-y^2}{2}})dy$.
+	\item $erf(u)=\frac{2}{\sqrt{\pi}} \int\limits_0^u e^{-y^2} dy$
+	\item $erfc(u)=1-erf(u)=\frac{2}{\sqrt{\pi}} \int\limits_u^\infty e^{-y^2} dy$
+	\item $Q(u)=\frac{1}{2} erfc\bigg( \frac{x}{\sqrt[]{2}} \bigg)$
+	\item $erfc(v)=2Q \big( \sqrt[]{2} v \big)$
 \end{itemize}
-
-And we have also learnt that complementary error function(erfc) is:
-\begin{itemize}
-	\item $erfc(z)= \frac{2}{\sqrt{\pi}} \int_{z}^{\infty} \exp(-x^2) dx$
-\end{itemize}
-
-From the limits of the integrals in previously defined $Q(z)$ function and $erfc(z)$ function that we can conclude that $Q$ function is directly related to erfc. Mathmetically by combining $Q$ function and $erfc$  we get the following Q function that directly related to erfc:
-
-\begin{itemize}
-	\item $Q(z)= \frac{1}{2} erfc(\frac{z}{\sqrt(2)})$
-\end{itemize}
+We also have inverse Q function that maps for any y value that gives $Q(x)=y$ to x ($Q^{-1}(y)=x$).
+These functions are defined in MATLAB and can be directly used with functions \it{qfunc(x)}, \it{qfuncinv(x)}, \it{erf(x)} and \it{erfc(x)} commands.
 \end{frame}
 
 \begin{frame}

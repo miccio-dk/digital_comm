@@ -192,19 +192,68 @@
 
 % part 2.3
 \begin{frame}
-	\frametitle{Matched filter}
+	\frametitle{Matched filter receiver}
 	\begin{itemize}
-		\item AWGN model
-		\item 
+		\item \emph{AWGN} model
+		\item Matched filter
+		\item Implementation through cross correlation
+		\item Bit error probability $P_E$
+		\item $P_E$ at different correlation coefficients
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\emph{AWGN} model}
+	\begin{itemize}
+		\item Additive white Gaussian noise
+		\begin{itemize}
+			\item Additive: received signal is sum of transmitted signal and noise
+			\item White: flat power spectrum, $r_{xx}(k) \neq 0$ only for $k = 0$
+			\item Gaussian: normally-distributed samples
+		\end{itemize}
+	\end{itemize}
+	\begin{columns}
+		\column{0.33\linewidth}
+			\fig{2.75cm}{awgn_n.png}{Example waveform}
+		\column{0.34\linewidth}
+			\fig{2.75cm}{awgn_f.png}{Frequency response}
+		\column{0.33\linewidth}
+			\fig{2.75cm}{awgn_h.png}{Samples histogram}
+	\end{columns}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Matched filter}
 	\begin{itemize}
+		\item System for detecting incoming symbols
+		\item Improves performances in presence of AWGN
+		\item Requires reference signals $s_0(t)$ and $s_1(t)$
+	\end{itemize}
+	\fig{4cm}{mf_block.png}{Matched filter block diagram}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Implementation}
+	\begin{itemize}
 		\item
 	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Bit error probability}
+	\begin{itemize}
+		\item
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bit error probability at different correlation coefficients}
+	\fig{4cm}{pe_r12.png}{$P_E$ at different correlation coefficients}
+	\begin{itemize}
+		\item
+	\end{itemize}
+\end{frame}
+
 
 
 

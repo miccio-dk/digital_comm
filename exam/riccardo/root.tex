@@ -49,7 +49,7 @@
 
 % document info
 \title{Exam presentation}
-\subtitle{Assignment 2.1 and 3}
+\subtitle{Assignments 2 and 3}
 \author[Riccardo]{Riccardo~Miccini\inst{1}}
 \institute[DTU]
 {
@@ -86,11 +86,13 @@
 
 % part 2.1
 \begin{frame}
-	\frametitle{Eye diagram}
-	\begin{itemize}
-		\item Characteristics
-		\item Impact of bandwidth
-	\end{itemize}
+	\frametitle{2.1 - Eye diagram}
+	\begin{Large}
+		\begin{itemize}
+			\item Characteristics
+			\item Impact of bandwidth
+		\end{itemize}
+	\end{Large}
 \end{frame}
 
 \begin{frame}
@@ -109,8 +111,8 @@
 	\begin{description}
 		\item[$A$] Difference between high and low levels
 		\item[$A_j$] Difference between $A$ and the eye opening
-		\item[$T_j$] Deviations from ideal timing
 		\item[$T_b$] Bit time period
+		\item[$T_j$] Deviations from ideal timing
 	\end{description}
 \end{frame}
 
@@ -130,20 +132,22 @@
 
 % part 2.2
 \begin{frame}
-	\frametitle{Q function}
-	\begin{itemize}
-		\item Normal \emph{pdf}
-		\item Q function in relation to normal \emph{pdf}
-		\item Q function in relation to complementary error function
-		\item Inverse Q function
-	\end{itemize}
+	\frametitle{2.2 - Q function}
+	\begin{Large}
+		\begin{itemize}
+			\item Normal \emph{pdf}
+			\item Q function in relation to normal \emph{pdf}
+			\item Q function in relation to complementary error function
+			\item Inverse Q function
+		\end{itemize}
+	\end{Large}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Normal probability density function}
 	\begin{itemize}
 		\item Continuous function representing likelihood of its argument
-		\item Useful to analyze phenomena of unknown distribution due to \emph{central limit theorem}
+		\item Useful to analyze unknown phenomena due to \emph{central limit theorem}
 		\item General form:
 		\begin{equation}
 			\mathcal{N}(\mu, \sigma^2) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(x - \mu)^2}{2 \sigma^2}}
@@ -192,14 +196,16 @@
 
 % part 2.3
 \begin{frame}
-	\frametitle{Matched filter receiver}
-	\begin{itemize}
-		\item \emph{AWGN} model
-		\item Matched filter
-		\item Implementation through-cross correlation
-		\item Bit error probability $P_E$
-		\item $P_E$ at different correlation coefficients
-	\end{itemize}
+	\frametitle{2.3 - Matched filter receiver}
+	\begin{Large}
+		\begin{itemize}
+			\item \emph{AWGN} model
+			\item Matched filter
+			\item Implementations
+			\item Bit error probability $P_E$
+			\item $P_E$ at different correlation coefficients
+		\end{itemize}
+	\end{Large}
 \end{frame}
 
 \begin{frame}
@@ -233,10 +239,14 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Implementation}
+	\frametitle{Implementation through convolution}
 	\begin{itemize}
 		\item Received signal $y(t)$ contains AWGN
-		\item $y(t)$ is cross-correlated with $s_1(t)$ and $s_2(t)$
+		\item $y(t)$ is convoluted with inverse reference signal:
+		\begin{itemize}
+			\item $h(t) = s_1(T - t)$
+			\item $h(t) = s_2(T - t)$
+		\end{itemize}
 		\item Resulting signals are summed into $v(t)$ and sampled at $t = T$
 		\item $v(T)$ is compared against threshold $k_{opt}$:
 		\begin{itemize}
@@ -247,34 +257,78 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Implementation through cross-correlation}
+	\begin{itemize}
+		\item Cross-correlation: signals are multiplied and integrated
+		\item Convolution with $h(t)$ is equivalent to cross-correlation:
+		\begin{equation}
+			v(t) = h(t) * y(t) = \int_0^T {s(T - \tau)y(t - \tau) d\tau}
+		\end{equation}
+		\item Cross-correlation: easier to implement analogically
+		\item Convolution: easier to implement with DSPs
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Bit error probability}
 	\begin{itemize}
-		\item
+		\item Bit error probability for matched filter receiver:
+		\begin{equation}
+			P_E = Q\left( \frac{\zeta}{2} \right)
+		\end{equation}
+		\item Maximum value of $\zeta$:
+		\begin{equation}
+			\zeta_{max} = \sqrt{\frac{2}{N_0} \int_{-\infty}^{\infty} {{|S_2(f) - S_1(f)|}^2} df}
+		\end{equation}
+		\item \emph{Parseval's theorem}: the integral of the square of a function is equal to the integral of the square of its transform
+		\item The integral of the squares of $s_1(t)$ and $s_2(t)$ are the energies of the two signals:
+		\begin{equation}
+			\zeta_{max}^2 = \frac{2}{N_0} \left(E_1 + E_2 -2\sqrt{E_1 E_2}\rho_{12}\right)
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bit error probability (2)}
+	\begin{itemize}
+		\item Correlation coefficient $\rho_{12}$ expresses the signals similarity:
+		\begin{equation}
+			\rho_{12} = \frac{1}{\sqrt{E_1 E_2}} \int_{-\infty}^{\infty} {s_1(t) s_2(t) dt}
+		\end{equation}
+		\item Setting $E_b = \frac{1}{2}(E_1 + E_2)$ and $R_{12} = \frac{\sqrt{E_1 E_2}}{E_b}\rho_{12}$
+		\item Substituting $\zeta_{max}$ into $P_E$ equation:
+		\begin{equation}
+			P_E = Q\left( \sqrt{\frac{E_1 + E_2 - 2\sqrt{E_1 E_2} \rho_{12}}{2 N_0}} \right) = Q\left( \sqrt{(1 - R_{12}) \frac{E_b}{N_0}} \right)
+		\end{equation}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Bit error probability at different correlation coefficients}
-	\fig{4cm}{pe_r12.png}{$P_E$ at different correlation coefficients}
 	\begin{itemize}
-		\item
+		\item Coefficient $R_{12}$ goes from -1 to 1
+		\begin{itemize}
+			\item -1: Uncorrelated symbol waveforms (antipodal), lowest $P_E$
+			\item 0: Orthogonal signals
+			\item 1: Highest correlation possible, i.e. identical symbol waveforms
+		\end{itemize}
+		\fig{4cm}{pe_r12.png}{$P_E$ at different correlation coefficients}
 	\end{itemize}
 \end{frame}
 
 
-
-
-
 % part 3
 \begin{frame}
-	\frametitle{Link budget for satellite communication}
-	\begin{itemize}
-		\item Link budget model
-		\item $SNR$ calculation
-		\item $P_E$ calculation
-		\item Impact of of $d$, $\lambda$, $B$, and $P_T$
-		\item Alternative modulation techniques: ASK and FSK
-	\end{itemize}
+	\frametitle{3 - Link budget for satellite communication}
+	\begin{Large}
+		\begin{itemize}
+			\item Link budget model
+			\item $SNR$ calculation
+			\item $P_E$ calculation
+			\item Impact of of $d$, $\lambda$, $B$, and $P_T$
+			\item Alternative techniques: ASK and FSK
+		\end{itemize}
+	\end{Large}
 \end{frame}
 
 \begin{frame}

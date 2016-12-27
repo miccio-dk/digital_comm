@@ -49,7 +49,7 @@
 
 % document info
 \title{Exam presentation}
-\subtitle{Assignment 2.2 and 2.3}
+\subtitle{Assignment 2 and Assignment 3}
 \author[Eren]{Eren~Can~Gungor\inst{1}}
 \institute[DTU]
 {
@@ -67,18 +67,31 @@
 
 % slide 1
 \begin{frame}
-	\frametitle{Eye diagram}
-	\begin{itemize}
-		\item Plot composed by overlaying segments of different bit sequences
-		\item Can be generated with an oscilloscope
-		\item Shows effects of \emph{inter-symbol interference}
-		\item Provides a qualitative measure of the system performance
-	\end{itemize}
+	\frametitle {The Eye Diagram for a Digital Communication Channel}
+\begin{itemize}
+	\item An eye diagram is used to see every possible symbol transition in one graph.
+	\item One can analyze these transitions to see inter-symbol interference (ISI) effects.
+	\item Generating an eye diagram requires plotting of overlapping signals of $k$-symbol duration where $k$ is an integer more than one since we need to see the transitions between symbols.
+	\item With real signals, it can be generated with an oscilloscope with time sweep frequency $1/kT_s$ where $T_s$ is the symbol duration.
+	\item With using an eye diagram, one can make comments on probability of error by looking at the eye opening.
+
+\end{itemize}
 \end{frame}
 
 \begin{frame}
+\begin{itemize}
+	\item Channel model is assumed as a low pass filter.
+	\item Butterworth filters with different cut-off frequencies are used as low pass filters to demonstrate the effects of ISI with an eye diagram. 
+	\item Normalized bandwidths are used as parameters of filters in the code. If normalized bandwidth is $B$ and symbol rate is $n_{sym}$ symbol per second then the bandwidth of the filter is given as $Bn_{sym}$ Hz.
+
+	\item We have sampling frequency $f_s=n_{sym} n_{samp}$ samples per second where $n_{samp}$ is the sample number in a symbol. To obtain a filter with bandwidth $Bn_{sym}$, we should use normalized frequency $f_{normalized}=\frac{Bn_{sym}}{f_S/2}=2B/n_{samp}$ ($\pi$ rad/sec).
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
 	\frametitle{Eye diagram characteristics}
-	\fig{9cm}{eye1.png}{Eye diagram of baseband antipodal signal}
+	\fig{3cm}{eye_diag_imp.png}{Eye diagram of baseband antipodal signal}
 	\begin{description}
 		\item[$A$] Difference between high and low levels
 		\item[$A_j$] Difference between $A$ and the eye opening
@@ -94,8 +107,9 @@
 			\fig{8cm}{eye2.png}{Eye diagram for normalized bandwidths 0.3, 0.7, 1.2}
 		\column{0.45\linewidth}
 			\begin{itemize}
-				\item Low BW: high amplitude and timing jitter
-				\item High BW: no ISI, chances of higher noise
+				\item ISI leads to $T_j$. increasing the signal bandwidth will result in increased slope that  which will result in more open eye
+				\item High BW: high amplitude and timing jitter.
+				\item Low BW: no ISI, chances of higher noise
 			\end{itemize}
 	\end{columns}
 \end{frame}
@@ -130,10 +144,6 @@ Normal distribution/Gaussian distribution is a really important and in fact most
 For the communication systems;
 Noise is an error or undesired random disturbance of a useful information in communication channel.The noise is a summation of unwanted or disturbing energy from natural and sometimes man-made sources.
 \end{frame}
-\begin{frame}
-	\frametitle{Gaussian Noise}
-If we look at simple basic model for the net effect at the receiver of noise in the communication system is to assumed additive, Gaussian noise. In this model we have two signal components one is deterministic signal and  the second component is the noise term, and is a quantity drawn from a Gaussian probability distribution with mean $0$ and some variance and it is  independent of the transmitted signal.
-\end{frame}
 
 \begin{frame}
 	\frametitle{Q2.1 Plotting gaussian pdf and explain important variables}
@@ -154,26 +164,14 @@ Now we can put our theory in a practice in this given question, we have created 
 
 \begin{frame}
 	\frametitle{Explanation of $Q(u)$ function}
-	$Q(u)$ function is a important variable for the Gaussian probability density function and cumulative distribution function. If we talk about $Q(u)$  function, there are two important points before we are going to derive the $Q(u)$ function.
+Cumulative distribution function (CDF) shows the probability that random variable $X$ is less than a value $x$,i.e., CDF $F(x)=Pr(X\leq x)=\int\limits^x_{-\infty}f(x)dx$ where $f(x)$ is normal probability density function. The probability that random variable $X$ is larger than a value $x$ defined as $Q$ function. Therefore, $Q(u)=1-F(u)$. Normal distribution has a $\mu$ value 0 and $\sigma$ value 1. By taking account these parameters, if we insert Gaussian PDF $f(x)$ into account $Q$ function becomes $Q(u)=\int\limits^{\infty}_u \frac{1}{ \sqrt{2\pi}} \exp({\frac{-y^2}{2}})dy$. For the general Gaussian PDF with $\mu$ and $\sigma$, a normalization should be done like $Q(\frac{u-\mu}{\sigma})$ as shown in book at page 295. In Fig. 3, shaded area shows the value of $Q$ function.
+\end{frame}
 
-	The $Q(u)$ function represents the area under the tail of a standard normal random variable and widely tabulated. Some interesting properties of the $Q- function$ are
-	\begin{itemize}
-		\item $Q(0)=1/2$
-		\item $Q(-\infty)=1$
-	\end{itemize}
-\end{frame}
 \begin{frame}
-	\frametitle{Linking $Q(u)$ function to Gaussian probability density function and cumulative distribution function}
-Now we can link $Q(u)$ function to Gaussian probability density function and cumulative distribution function
-\begin{itemize}
-	\item The Gaussian probability density function of unit variance and zero mean is $Z(x)=\frac{1}{\sqrt{2\pi}} \exp(\frac{-x^2}{4t})$
-	\item And corresponding cumulative distribution function is $P(x)=\int_{-\infty}^{x} Z(t) dt$
-	\item The Gaussian $Q$ function is defined as:
-		\begin{itemize}
-			\item $ Q(x) = 1-P(x)=\int_{x}^{-\infty} Z(t) dt$
-		\end{itemize}
-\end{itemize}
+\fig{5cm}{fig3.png}{$Q(u)$ graph }
 \end{frame}
+
+
 
 \begin{frame}
 	\frametitle{Assignment related question for the $Q(u)$ function}
@@ -181,9 +179,13 @@ To prove our theory behind, we have constructed the $Q(u)$ function plot that wi
 values of relevance to the detection problems for digital communication receivers. MATLAB filed called \code{qfunction.m} has been created for this assigment. For the next step
 Two important argument has been chosen for this assignment, those are:
 	\begin{itemize}
-		\item $R_12= 0 (Orthogonal Signals)$
-		\item $R_12= -1( Antipodal Signals) $
+		\item $R_{12}= 0 (Orthogonal Signals)$
+		\item $R_{12}= -1( Antipodal Signals) $
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\fig{5cm}{figure_for_23.png}{$Q(u)$ graph }
 \end{frame}
 
 \begin{frame}
@@ -200,13 +202,17 @@ These functions are defined in MATLAB and can be directly used with functions \i
 \end{frame}
 
 \begin{frame}
+	\fig{5cm}{fig7.png}{$Q(u)^(-1)$ graph}
+\end{frame}
+
+\begin{frame}
 	\frametitle{MATLAB code for user-defined $Q$ function}
 We also note that MATLAB does not have built in function.So we have created a MATLAB file that uses erfc function to do the calculations and simulation process related to the $Q(u)$ function. It is accessible from the Source code section under the name of \code{qfn.m}.
 \end{frame}
 
 \begin{frame}
-	\frametitle { Assignment 2.3}
-In assignment three, we will look into optimising our filter by using the $Q$ function and error functions that we have learnt from the part 2 of this Assignment. The important things we will specifically look in these chapter are:
+	\frametitle { Assignment 2 Part 3}
+In assignment two, part 3, we will look into optimising our filter by using the $Q$ function and error functions that we have learnt from the part 2 of this Assignment. The important things we will specifically look in these chapter are:
 \begin{itemize}
 	\item Additive White Gaussian Noise for Matched Filter
 	\item Matched Filter
@@ -217,6 +223,12 @@ In assignment three, we will look into optimising our filter by using the $Q$ fu
 
 \begin{frame}
 	\frametitle{Additive White Gaussian Noise for Matched Filter}
+Matched filter receiver is an optimum receiver structure in terms of minimum prob- ability of error in communication systems. Derivation of the optimality of the strucure is given in the book. Block diagram of matched filter output for binary data in AWGN data is given in Fig.5 which is taken from the book page 409
+
+\end{frame}
+	
+\begin{frame}
+	\frametitle{Working Principle}
 For a working principle, The signal is multiplied by a locally stored reference copy ,and integrated over time.
 To understand the principles of a matched filter receiver for binary data in white Gaussian noise, thus using the so called AWGN (Additive White Gaussian Noise) model. We have firstly introduced the figure below.
 \fig{5cm}{figure_31.png}{AWGN for Matched Filter}
@@ -224,97 +236,56 @@ To understand the principles of a matched filter receiver for binary data in whi
 
 \begin{frame}
 	\frametitle{Principles of AWGN for Matched Filter}
-Received signal $y(t)$ should be passed through matched filters $s_1(T-t)$ and $s_2(T-t)$ and their difference must be sampled at $t=T$ and then a decision should be according to the optimal threshold value. $s_1(t)$ and $s_2(t)$ are original signals corresponds to binary data and $s_1(t)<s_2(t)$ is assumed. Optimal threshold value is $\frac{E_2-E_1}{2}$ where $E_2$ and $E_1$ signal energies which are finite. It can be shown to be the optimal detector if
+Received signal $y(t)$ should be passed through matched filters $s_1(T-t)$ and $s_2(T-t)$ and their difference must be sampled at $t=T$ and then a decision should be according to the optimal threshold value. $s_1(t)$ and $s_2(t)$ are original signals corresponds to binary data and $s_1(t)<s_2(t)$ is assumed. Optimal threshold value is $\frac{E_2-E_1}{2}$ where $E_2$ and $E_1$ signal energies which are finite.
 \end{frame}
 
 \begin{frame}
 	\frametitle{Another example on how system works for AWGN Matched Filter}
 	\fig{5cm}{working_principle_mf.png} {Working Principle of AWGN Matched Filter}
 \end{frame}
-\begin{frame}
-	\frametitle{Assignment Questions that related to the Matched Filter}
-There are several questions that has been done in regards to the Matched Filter. The first question was understanding how \code{c8ce1} works.
-
-Firstly, code was not working properly so we have changed it and there were not enough explanation for the process and what it does.
-
-Basically code was calculating delay estimate, power in both reference vector and measurement vector, finding max for the cross-correlation matrix by using sine waves. 
-\end{frame}
 
 \begin{frame}
 	\frametitle{Creating a User Defined $Q$ function}
-To run our code for assignments 3.4 and 3.5 we have created a user defined  qfn function. The code has been created as a \code{qfn.m} which can be accessible from the report.
+To run our code for assignments 3.4 and 3.5 we have created a user defined \code{qfn.m} function. The code has been created as a \code{qfn.m} which can be accessible from the report.
 \end{frame}
 
 \begin{frame}
-	\frametitle{Question 3.4 and 3.5}
-For the questions 3.4  and 3.5 we have modified and changed the \code{ce9e1.m} MATLAB script. Code was broken and it was only taken 4 inputs. We have modified in a way that it can take up 8 inputs also we have graphed with given 8 correlation coefficients. Those were;
-$[-1, -0.75, -0.5, 0, 0.5, 0.75, 0.8 ,0.995]$ . To prove that we did correct calculation and simulation graph in the next slight can be seen.
+	\frametitle{Q $3.4$ and $3.5$ $P_e$ Graph For Various Correlation Coefficients}
+We enter [-1 -0.75 -0.5 0 0.5 0.75 0.8 .995] matrix when we run script and it plots probability of error for different correlation values. For lower correlation values the probability of error decreases since the signals affect each other less. As the correlation values increase, the signals affect each other, e.g., if one is sent both matched filters high values of outputs and with noise the one that isn't sent may become higher easily. In Fig. 6, the results can be seen as expected.
 \end{frame}
 
 \begin{frame}
 	\frametitle{Graph with 8 Correlation Coefficient Inputs}
 	\fig{5cm}{question351.png}{$P_E $ over $N_o$ graph for 8 correlation coefficient Inputs}
 \end{frame}
+\begin{frame}
+	\frametitle{Matched Filter and Correlator}
+
+In matched filter, $h(t)=s(T-t)$ and output of this filter can be written as convolution
+$$h(t)*y(t)=\int\limits^T_0s(T-\tau)y(t-\tau)d\tau$$
+where $y(t)$ is received signal. Since system samples signals at t=T and with change of variables to $\alpha=T-\tau$
+\end{frame} 
 
 \begin{frame}
-	\frametitle{Matched filter by a Correlator}
-Matched filter receiver is an optimum receiver structure in terms of minimum probability of error in communication systems. Derivation of the optimality of the structure is given in the book. Block diagram of matched filter output for binary data in AWGN data is given in figure below which is taken from the book page 409. 
-	\fig{3cm}{correlator_matched_filter.png}{Correlator matched Filter}
-\end{frame}
-\begin{frame}
-	\frametitle{Cross-Correlation Functionality }
+	\frametitle{ Derivation continues}
+we can rewrite above equation as
+$$v(T)=\int\limits^T_0s(\alpha)y(\alpha)d\alpha$$
+where $v(T)$ is sampled version of convolution. The result is integration of the multiplication of received signal with original signal $s(t)$ and it is simply correlation of signals. Therefore, one can implement matched filter receiver with correlator as shown above. 
 
-\begin{itemize}
-	\item $\int_{0}^{T} r(t) f_k(t)=\int_{0}^{T} [s_m(t)+n(t)] f_k(t) dt$
-	\item $r_k(t)=s_m(t)+n_k(t)$
-	\item $\int_{0}^{T} s_m(t) f_k(t) $ for the values of $k= 1,2,3,4,5,...$
-	\item $\int_{0}^{T} n(t) f_k(t) $ for the values of $k=1,2,3,4,5.....$
-\end{itemize}
-
-Now our signal has been represented by the $s_m(t)$ and the $n(k)$ (random variables as noise)
-
-Now the signal can be represent $r(t)$ as
-
-\begin{itemize}
-	\item $r(t)= \sum\limits_{k=1}^N = s_m(t) f_k(t)+ n(t)'+\sum\limits_{k=1}^N = n_k(t) f_k(t)$
-	\item $\sum\limits_{k=1}^N = r_k(t) f_k(t)$
-\end{itemize}
-
-As we can see that $n(t)'$ is irrelevant to which signal is going to transmitted. The decision will be made upon entirely on correlator output and the basis functions.
-\end{frame}
-
-\begin{frame}
-	\frametitle{Deriving Matched Filter Functions}
-Now we can compare with Matched filter output. For matched filter, we use $N$ bank linear filters. Impulse responses of the $N$ filters are;
-\begin{itemize}
-	\item $h_k(t)=f_k(T-t)$ for invertals between , $0<t<T$
-\end{itemize}
-
-The output filters become:
-\begin{itemize}
-	\item $y_k(t)=\int_{0}^{T} r(\tau) f_k(T-\tau)d(\tau)$
-	\item $\int_{0}^{T} r(\tau) f_k(T-t+\tau)d(\tau)$ for the $k= 1,2,3,4,5,...N$
-\end{itemize}
-If we sample outputs of the linears at $t=T$
-\begin{itemize}
-\item $y_k(T)=\int_{0}^{T} r(\tau) f_k(\tau)d(\tau)$ which will eventually become $r_k$
-\end{itemize}
-
-Hence our theoritical approach has been proved by mathematical derivation of matched filter and cross-correlator. Both have same output even though calculations have been done in a different way for both.
 \end{frame}
 
 \begin{frame}
 	\frametitle{Noise on the timing Synchronization in The Receiver}
-It is possible that the exact arrival time of received signal can be in error. That causes the sampling at wrong instances of matched filter output. That means receiver is no longer an optimal receiver because system samples output different point rather than it's maximum. That will cause a decrease of the amplitude of sampled signal and therefore, signal to noise ratio will also decrease. As a result probability of error become larger in timing synchronization errors. 
+It is possible that the exact arrival time of received signal can be in error. That causes the sampling at wrong instances of matched filter output. That means receiver is no longer an optimal receiver because system samples output different point rather than it's maximum. That will cause a decrease of the amplitude of sampled signal and therefore, signal to noise ratio will also decrease. As a result probability of error becomes larger in timing synchronisation errors. 
 \end{frame}
 
 \begin{frame}
 	\frametitle{Bit Error Probability in Matched Filter}
 To find out bit error probability in a system with matched filter, we first need to define threshold. $s_1(T)$ and $s_2(T)$ are the inputs to the matched filter, $s_{01}(T)$ and $s_{02}(T)$ are the outputs of the matched filter. Then the equation becomes
 \begin{itemize}
-	\item $s_{01}(T)=\int_{-\infty}^{infty} h(\lambda) s_1(T-\lambda) d \lambda $
-    	\item $ \int_{-\infty}^{infty} ( s_2(T-\lambda) - s_1(T-\lambda)) s_1(T-\lambda) d \lambda $
-	\item  $\int_{-\infty}^{infty} s_2(u) s_1(u) du - \int_{-\infty}^{\infty} (s_1(u))^2 du $
+	\item $s_{01}(T)=\int_{-\infty}^{\infty} h(\lambda) s_1(T-\lambda) d \lambda $
+    	\item $ \int_{-\infty}^{\infty} ( s_2(T-\lambda) - s_1(T-\lambda)) s_1(T-\lambda) d \lambda $
+	\item  $\int_{-\infty}^{\infty} s_2(u) s_1(u) du - \int_{-\infty}^{\infty} (s_1(u))^2 du $
     	\item $ \sqrt{E_1 E_2} \rho_{12} - E_1 $
 \end{itemize}
 
@@ -332,7 +303,7 @@ For the equiprobable symbol selection case we have \\
 $P_e = P(Error|s_1(t)) \frac{1}{2} + P(Error|s_2(t)) \frac{1}{2}$\\
 This can be formed as
 $P_e=Q(\frac{s_{02}(T)-s_{01}(T)}{2 \sigma_0})$ \\
-if we make the selection of threshold as $k_opt$.
+if we make the selection of threshold as $k_{opt}$.
 We put values of $s_{01}$ and $s_{02}$ to the equation and it becomes
 $P_e=Q(\frac{E_1+E_2-2\rho \sqrt{E_1 E_2}}{2 \sigma_0}\bigg)$
 
@@ -357,9 +328,15 @@ $P_e=Q(\frac{E_1+E_2-2\rho \sqrt{E_1 E_2}}{2 \sigma_0}\bigg)$
 \begin{frame}
 	\frametitle{Link budget model variables}
 	\begin{description}
-		\item[$(\frac{4 \pi d}{\lambda})^2$] Free-space loss
-		\item[$ERP = P_T G_T$] Effective radiated power
-		\item[$G_R$] Gain of receiver antenna
+		\item[$(\frac{4 \pi d}{\lambda})^2$] Free-space loss.Signal strength loss occurring in a line-of-sight path through free space (usually air), without accounting for reflection or diffraction.
+			\begin{equation}
+	{FSPL} = \left(\frac{4 \pi d}{\lambda}\right)^2
+			\end{equation}
+		\item[$ERP = P_T G_T$] Effective radiated power. Equivalent power transmitted equally in all directions, from a theoretical spherically radiating source.
+			\begin{equation}
+	{ERP}_{dB} = 10\log_{10}(P_T) + G_{T, dB}
+			\end{equation}
+		\item[$G_R$] Gain of receiver antenna.
 		\item[$L_0$] Other losses, link budget margin
 	\end{description}
 \end{frame}
@@ -375,6 +352,11 @@ $P_e=Q(\frac{E_1+E_2-2\rho \sqrt{E_1 E_2}}{2 \sigma_0}\bigg)$
 	\begin{description}
 		\item[$P_R$] Calculated using link budget model
 		\item[$P_{int}$] Noise power, proportional to the receiver noise temperature and the transmission bandwidth
+			\begin{equation}
+	P_{int} = k T_R B
+\end{equation}
+
+where $T_R$ is the noise temperature of the receiver, $B$ is the bandwidth of the transmission, and $k$ is the Boltzmann constant.
 	\end{description}
 \end{frame}
 
@@ -447,7 +429,8 @@ $P_e=Q(\frac{E_1+E_2-2\rho \sqrt{E_1 E_2}}{2 \sigma_0}\bigg)$
 	\begin{equation}
 		P_E = Q\left(\sqrt{\left(1 - R_{12}\right) \frac{E_b}{N_0}}\right) = Q\left(\sqrt{\frac{E_b}{N_0}}\right)
 	\end{equation}
-Whilst the formula is similar to the one previously introduced for thecalculation of $P_E$ in a BPSK transmission, it lacks a $2$ term. Therefore, the signal-to-noise radio of a ASK transmission has to be $3 dB$ higher in order to maintain the same performances.
+Whilst the formula is similar to the one previously introduced for the
+calculation of $P_E$ in a BPSK transmission, it lacks a $\sqrt{2}$ term. Therefore, the signal-to-noise radio of a ASK transmission has to be $3 dB$ higher in order to maintain the same performances.
 \end{frame}
 
 \begin{frame}

@@ -66,55 +66,19 @@ It can be seen below:
 Code has been constructed and located in the source code section of this report. It can be seen from the source part and it works perfectly with the code \code{ce9e1.m}. Detailed explanation given in the source code section.
 \subsection{\code{c9ce1a.m}: Extending  the code such that it can take 8 input arguments by given correlation coefficient inputs }
 
+We enter [-1 -0.75 -0.5 0 0.5 0.75 0.8 .995] matrix when we run script and it plots probability of error for different correlation values. For lower correlation values the probability of error decreases since the signals affect each other less. As the correlation values increase, the signals affect each other, e.g., if one is sent both matched filters high values of outputs and with noise the one that isn't sent may become higher easily. In Fig. 6, the results can be seen as expected.
+
 For the part 3.4 and 3.5 \code{question35.m} MATLAB code has been created. It can be seen that code is able take 8 correlation input. It is accessible from the appendix part of this report. Given 8 correlation-coefficient inputs are $[-1, -0.75, -0.5, 0, 0.5, 0.75, 0.8, 0.995]$. Plot has been given below.
  \fig{9cm}{question351.png}{$P_E$ over $E_b/N_o$ graph for investigating how it will change with introduced correlation coefficients}
-%tomorrow explain with providing the book graph example.
+ 
 \subsection{ Implementation of Matched filter with a Correlator that includes Cross-Correlations}
-\fig{9cm}{correlator_matched_filter.png}{Correlator Matched Filter}
-As we can from the Figure 3 that we can implement the matched filter by implementing the correlation detectors. The cross-correlator does the cross-correlation between the noisy signal and noiseless signal. 
 
-If we look at the matched filter, it does the convolution between the received signal and the time-reversed copy of the reference signal. We can mathematically prove that both matched filter and the cross-correlator will give us same output signal values. To prove this we will derive mathematical  derivation. 
+In matched filter, $h(t)=s(T-t)$ and output of this filter can be written as convolution
+$$h(t)*y(t)=\int\limits^T_0s(T-\tau)y(t-\tau)d\tau$$
+where $y(t)$ is received signal. Since system samples signals at t=T and with change of variables to $\alpha=T-\tau$ we can rewrite above equation as
+$$v(T)=\int\limits^T_0s(\alpha)y(\alpha)d\alpha$$
+where $v(T)$ is sampled version of convolution. The result is integration of the multiplication of received signal with original signal $s(t)$ and it is simply correlation of signals. Therefore, one can implement matched filter receiver with correlator as shown above. 
 
-Suppose we have received $r(t)$ and is passed through parallel bank of $N$ ?crosscorrelators? which basically compute the prediction of $r(t)$ onto the $N$-basis functions as $f_n(t)$.This  can be seen in Figure 3.
-
-For cross-correlator  signal is now represented by $s_m(t)$ with components $s_{mk}(t)$. $s_{mk}(t)$ values depend on how many $M_{signal}$ is transmitted. Now other components of cross-correlator will be explained below for the mathematical derivation for  the output signal.
-
-\begin{itemize}
-	\item $\int_{0}^{T} r(t) f_k(t)=\int_{0}^{T} [s_m(t)+n(t)] f_k(t) dt$
-	\item $r_k(t)=s_m(t)+n_k(t)$
-	\item $\int_{0}^{T} s_m(t) f_k(t) $ for the values of $k= 1,2,3,4,5,...$
-	\item $\int_{0}^{T} n(t) f_k(t) $ for the values of $k=1,2,3,4,5.....$
-\end{itemize}
-
-Now our signal has been represented by the $s_m(t)$ and the $n(k)$ (random variables as noise)
-
-Now the signal can be represent $r(t)$ as
-
-\begin{itemize}
-	\item $r(t)= \sum\limits_{k=1}^N = s_m(t) f_k(t)+ n(t)'+\sum\limits_{k=1}^N = n_k(t) f_k(t)$
-	\item $\sum\limits_{k=1}^N = r_k(t) f_k(t)$
-\end{itemize}
-
-As we can see that $n(t)'$ is irrelevant to which signal is going to transmitted. The decision will be made upon entirely on correlator output and the basis functions. 
-
-Now we can compare with Matched filter output. 
-
-For matched filter, we use $N$ bank linear filters. Impulse responses of the $N$ filters are;
-\begin{itemize}
-	\item $h_k(t)=f_k(T-t)$ for invertals between , $0<t<T$
-\end{itemize}
-
-The output filters become:
-\begin{itemize}
-	\item $y_k(t)=\int_{0}^{T} r(\tau) f_k(T-\tau)d(\tau)$
-	\item $\int_{0}^{T} r(\tau) f_k(T-t+\tau)d(\tau)$ for the $k= 1,2,3,4,5,...N$
-\end{itemize}
-If we sample outputs of the linears at $t=T$
-\begin{itemize}
-\item $y_k(T)=\int_{0}^{T} r(\tau) f_k(\tau)d(\tau)$ which will eventually become $r_k$
-\end{itemize}
-
-Hence our theoritical approach has been proved by mathematical derivation of matched filter and cross-correlator. Both have same output even though calculations have been done in a different way for both.
 	
 \subsection{Noise presence on the timing synchronisation in the receiver }
  
@@ -137,4 +101,6 @@ For the question 3.3. We have created a user-defined $q(.)$ function because in 
 
 \begin{lstinputlisting}[language=Octave]{../scripts/2/qfn.m}
 \end{lstinputlisting}
+
+
 
